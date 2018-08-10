@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from .routers import router
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('bCoreRiskApp.urls')),
+    #path('app/', include('bCoreRiskApp.urls')),
+    path('app/', TemplateView.as_view(template_name='index.html')),
+    path('api/', include(router.urls)),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
