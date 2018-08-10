@@ -25,18 +25,20 @@ SECRET_KEY = '&oxibroabj_mck$zr9ia-olud11@33vg23d55k9ovlurrd0jpq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.254.' + str(v) for v in range(256)]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'bCoreRiskApp.apps.BcoreriskappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
