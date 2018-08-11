@@ -1,0 +1,30 @@
+Design Notes:
+
+Implement polymorphism in risk fields
+- Decided to use single table inheritance
+    - Nullable fields within a single source table
+    - Polymorphism is achieved using the property decorator
+- Decided against multiple table inheritance
+    - It's likely that all fields would be accessed at the same time. This method would require joining on multiple tables when trying to get the fields associated with a given entry
+        - Using abstract base class creates redundant data in the DB
+        - Not using abstract base class adds an intermediate table which needs inner_join with any query
+REFs: https://lukeplant.me.uk/blog/posts/avoid-django-genericforeignkey/
+
+- Configure webpack-loader per https://medium.com/@jrmybrcf/how-to-build-api-rest-project-with-django-vuejs-part-i-228cbed4ce0c
+Need to run './manage.py collectstatic' to pull vue files into django
+
+Issues resolved:
+- Webpack config js file does not exists
+    - [RESOLUTION] VUE CLI 3 handles webpack configuration internally additional configs need to be added to vue.config.js inside the following:
+        module.exports = {
+            configureWebpack: {}
+        }
+    - Additionally main JS needs to remain as is when following the "Configure webpack-loader instructions above"
+    - [REF] https://cli.vuejs.org/guide/webpack.html
+- ./manage.py runserver only serving blank pages
+    - Receiving 404 error for all static files
+    - [RESOLUTION] added vue.config.js with entry for "baseUrl: '/static'"
+- Vue root object is not attempting to call '/api/risk/' while loading
+    - Console showing error "TypeError: Cannot read property 'get' of undefined in VueJs"
+    - [NOTES] "$http" is defined in vue-resource which is undefined
+    - [RESOLUTION] Add and import vue-resource package, also installed bootstrap and css for good measure.
