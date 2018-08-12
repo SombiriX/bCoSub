@@ -1,8 +1,12 @@
 <template>
   <!-- <v-btn v-on:click="count++" color="success">You clicked me {{ count }} times.</v-btn> -->
   <div>
-    <v-btn v-for="risk_field in risk_fields" :key="risk_field.id">
+    <v-chip close v-for="risk_field in risk_fields" :key="risk_field.id">
+      <v-avatar :color="risk_field.f_color">{{ risk_field.field_type }}</v-avatar>
       {{ risk_field.field_name }}
+    </v-chip>
+    <v-btn flat icon color="accent">
+      <v-icon dark>add_circle_outline</v-icon>
     </v-btn>
   </div>
 </template>
@@ -14,7 +18,6 @@ export default {
   delimiters: ['${', '}'],
   data () {
     return {
-      count: 0,
       risk_fields: [],
       loading: false,
       currentRiskField: {},
@@ -28,15 +31,29 @@ export default {
   methods: {
     getRiskFields: function () {
       this.loading = true
+      var riskID = this.risk_id
       this.$http.get('/api/riskfield/')
         .then((response) => {
-          this.risk_fields = response.data
-          this.loading = false
+          this.risk_fields = response.data.filter(function (rf) {
+            if (rf.risk.id === riskID) {
+              if (rf.field_type === 'T') {
+                rf.f_color = 'pink darken-2'
+              } else if (rf.field_type === 'N') {
+                rf.f_color = 'lime'
+              } else if (rf.field_type === 'D') {
+                rf.f_color = 'light-green'
+              } else if (rf.field_type === 'E') {
+                rf.f_color = 'purple darken-2'
+              } else { rf.f_color = 'white' }
+              return rf
+            }
+          })
         })
         .catch((err) => {
           this.loading = false
           console.log(err)
         })
+      this.loading = false
     },
     getRiskField: function (id) {
       this.loading = true

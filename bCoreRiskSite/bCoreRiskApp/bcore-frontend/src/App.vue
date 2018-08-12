@@ -2,22 +2,45 @@
   <v-app dark>
     <v-content>
       <v-toolbar color="primary">
-        <v-toolbar-items>
-          <v-btn small color="secondary">Manage Risks</v-btn>
-        </v-toolbar-items>
+        <v-toolbar-title>Risk Manager</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon>search</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>apps</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>refresh</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>more_vert</v-icon>
+        </v-btn>
       </v-toolbar>
-      <div v-for="risk in risks" v-bind:risk_id="risk.id":key="risk.id">          
-        <v-text-field
-          name="name"
-          label="Risk Class"
-          id="risk_class_input"          
-          :placeholder=" risk.risk_class "
-        >
-        </v-text-field>
-        <risk-field></risk-field>
-      </div>
-      <v-btn color="primary">Add Field</v-btn>
-      <v-btn color="success" dark>Submit Risk</v-btn>
+      <v-container>
+        <v-flex v-for="risk in risks" :key="risk.id">
+          <v-layout row wrap>
+            <v-text-field
+              name="name"
+              label="Risk Class"
+              id="risk_class_input"
+              :placeholder=" risk.risk_class "
+            >
+            </v-text-field>
+            <v-btn flat icon color="accent">
+              <v-icon dark>remove_circle_outline</v-icon>
+            </v-btn>
+          </v-layout>
+          <v-layout row wrap>
+            <risk-field v-bind:risk_id="risk.id"></risk-field>
+          </v-layout>
+        </v-flex>
+        <v-layout row wrap>
+          <v-btn fab dark color="accent">
+            <v-icon dark>add</v-icon>
+          </v-btn>          
+        </v-layout>
+      </v-container>
     </v-content>
   </v-app>
 </template>
