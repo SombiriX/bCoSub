@@ -175,11 +175,7 @@ export default {
     },
     updateRisk: function () {
       this.loading = true
-      this.$http.put(`/api/risk/${this.currentRisk.risk_id}/`, this.currentRisk, {
-        headers: {
-          'X-CSRFToken': Vue.cookie.get('csrftoken')
-        }
-      })
+      this.$http.put(`/api/risk/${this.currentRisk.risk_id}/`, this.currentRisk)
         .then((response) => {
           this.loading = false
           this.currentRisk = response.data
@@ -192,11 +188,7 @@ export default {
     },
     deleteRisk: function (id) {
       this.loading = true
-      this.$http.delete(`/api/risk/${id}/`, {
-        headers: {
-          'X-CSRFToken': Vue.cookie.get('csrftoken')
-        }
-      })
+      this.$http.delete(`/api/risk/${id}/`)
         .then((response) => {
           this.loading = false
           this.getRisks()
