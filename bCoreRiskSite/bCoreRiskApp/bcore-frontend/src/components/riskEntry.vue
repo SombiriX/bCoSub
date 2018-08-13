@@ -10,7 +10,13 @@
         >
         </v-text-field>
         <v-tooltip bottom>
-          <v-btn flat icon color="accent" slot="activator">
+          <v-btn
+            flat
+            icon
+            color="accent"
+            slot="activator"
+            @click.native.stop="delRiskDialog = true, currentRisk=risk"
+          >
             <v-icon dark>remove_circle_outline</v-icon>
           </v-btn>
             <span>Delete Risk Class</span>
@@ -27,36 +33,69 @@
           dark
           color="accent"
           slot="activator"
-          @click.native.stop="dialog = true">
+          @click.native.stop="addRiskDialog = true">
           <v-icon dark>add</v-icon>
         </v-btn>
         <span>New Risk Class</span>
       </v-tooltip>
     </v-layout>
+<!-- User Action Dialogs -->
     <v-layout row justify-center>
-      <v-dialog v-model="dialog" max-width="400">
+      <v-dialog v-model="addRiskDialog" max-width="400">
+        <v-form
+          ref="rClassCreate"
+          v-model="rClassValid"
+          lazy-validation
+        >
+          <v-card>
+            <v-container grid-list-xs>
+              <v-text-field
+                autofocus
+                label="Risk Class"
+                id="risk_class_input"
+                hint="For example: Car, House, Business, pets, etc..."
+                :rules=[rules.required]
+                v-model="newRiskClass.risk_class"
+              >
+              </v-text-field>
+            </v-container>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="primary"
+                flat="flat"
+                @click.native="addRiskDialog = false, addRisk(), clear()"
+                :disabled="!rClassValid"
+              >
+                Create
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-form>
+      </v-dialog>
+    </v-layout>
+    <v-layout row justify-center>
+      <v-dialog v-model="delRiskDialog" max-width="400">
         <v-card>
           <v-container grid-list-xs>
-            <v-text-field
-              name="rClassCreate"
-              label="Risk Class"
-              id="risk_class_input"
-              hint="For example: Car, House, Business, pets, etc..."
-              :rules=[rules.required]
-              v-model="newRiskClass.risk_class"
-              @keydown.enter="dialog = false, addRisk()"
-            >
-            </v-text-field>
+            <v-card-title class="headline">
+              Really delete "{{currentRisk.risk_class}}"?
+            </v-card-title>
+            <v-card-text>This action cannot be undone</v-card-text>
           </v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="primary"
+              color="success"
               flat="flat"
-              @click.native="dialog = false, addRisk()"
+              @click.native="delRiskDialog = false">NO</v-btn>
+            <v-btn
+              color="error"
+              flat="flat"
+              @click.native="delRiskDialog = false, deleteRisk(currentRisk.id)">
+                YES
+            </v-btn
             >
-              Create
-            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -78,7 +117,9 @@ export default {
       currentRisk: {},
       message: null,
       newRiskClass: {'risk_class': ''},
-      dialog: false,
+      addRiskDialog: false,
+      delRiskDialog: false,
+      rClassValid: true,
       rules: {
         required: value => !!value || 'Required.'
       }
@@ -134,7 +175,11 @@ export default {
     },
     updateRisk: function () {
       this.loading = true
-      this.$http.put(`/api/risk/${this.currentRisk.risk_id}/`, this.currentRisk)
+      this.$http.put(`/api/risk/${this.currentRisk.risk_id}/`, this.currentRisk, {
+        headers: {
+          'X-CSRFToken': Vue.cookie.get('csrftoken')
+        }
+      })
         .then((response) => {
           this.loading = false
           this.currentRisk = response.data
@@ -147,7 +192,11 @@ export default {
     },
     deleteRisk: function (id) {
       this.loading = true
-      this.$http.delete(`/api/risk/${id}/`)
+      this.$http.delete(`/api/risk/${id}/`, {
+        headers: {
+          'X-CSRFToken': Vue.cookie.get('csrftoken')
+        }
+      })
         .then((response) => {
           this.loading = false
           this.getRisks()
@@ -156,6 +205,9 @@ export default {
           this.loading = false
           console.log(err)
         })
+    },
+    clear: function () {
+      this.$refs.rClassCreate.reset()
     }
   }
 }
