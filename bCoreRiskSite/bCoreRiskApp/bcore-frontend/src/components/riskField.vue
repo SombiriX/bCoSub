@@ -1,6 +1,15 @@
 <template>
   <div>
-    <v-chip close v-for="risk_field in risk_fields" :key="risk_field.id">
+    <v-chip
+      close
+      v-for="(risk_field, i) in risk_fields"
+      :key="risk_field.id"
+      v-model="risk_fields[i].displayed"
+      @input="
+        currentRiskField=risk_fields[i],
+        delRFieldDialog = true,
+        risk_fields[i].displayed=true"
+    >
       <v-avatar :color="risk_field.f_color">{{ risk_field.field_type }}</v-avatar>
       {{ risk_field.field_name }}
     </v-chip>
@@ -10,6 +19,36 @@
       </v-btn>
       <span>Add new field</span>
     </v-tooltip>
+    <v-layout row justify-center>
+      <v-dialog v-model="delRFieldDialog" max-width="400">
+        <v-card>
+          <v-container grid-list-xs>
+            <v-card-title class="headline">
+              Really delete "{{currentRiskField.field_name}}"?
+            </v-card-title>
+            <v-card-text>This action cannot be undone</v-card-text>
+          </v-container>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="success"
+              flat="flat"
+              @click.native="delRFieldDialog = false"
+            >
+                NO
+            </v-btn>
+            <v-btn
+              color="error"
+              flat="flat"
+              @click.native="delRFieldDialog = false,
+                deleteRiskField(currentRiskField.id)"
+            >
+                YES
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
   </div>
 </template>
 
@@ -24,7 +63,13 @@ export default {
       loading: false,
       currentRiskField: {},
       message: null,
-      newRiskField: { 'field_name': null, 'field_type': null, 'field': null }
+      newRiskField: { 'field_name': null, 'field_type': null, 'field': null },
+      addRFieldDialog: false,
+      delRFieldDialog: false,
+      rFieldValid: true,
+      rules: {
+        required: value => !!value || 'Required.'
+      }
     }
   },
   mounted: function () {
@@ -37,6 +82,7 @@ export default {
       this.$http.get('/api/riskfield/')
         .then((response) => {
           this.risk_fields = response.data.filter(function (rf) {
+            // Set style based on data type
             if (rf.risk.id === riskID) {
               if (rf.field_type === 'T') {
                 rf.f_color = 'pink darken-2'
@@ -47,6 +93,8 @@ export default {
               } else if (rf.field_type === 'E') {
                 rf.f_color = 'purple darken-2'
               } else { rf.f_color = 'white' }
+              // Add display data
+              rf.displayed = true
               return rf
             }
           })
