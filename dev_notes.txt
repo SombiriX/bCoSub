@@ -28,3 +28,10 @@ Issues resolved:
     - Console showing error "TypeError: Cannot read property 'get' of undefined in VueJs"
     - [NOTES] "$http" is defined in vue-resource which is undefined
     - [RESOLUTION] Add and import vue-resource package, also installed bootstrap and css for good measure.
+- Attempting to use POST fails with either 403 or 400 error
+    - The app needs a CRSF cookie from the server
+    - [RESOLUTION] - Installed vue-js-cookie, to get csrf cookie 
+- API POST requests fail when v-model is set from text field
+    - Setting the value manually works but attempting to get the value from a text field results in the server receiving the default value.
+    [RESOLUTION] - Installed vue-js-cookie, to get csrf cookie
+

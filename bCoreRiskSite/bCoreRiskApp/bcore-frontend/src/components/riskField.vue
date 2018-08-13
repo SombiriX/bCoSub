@@ -1,13 +1,15 @@
 <template>
-  <!-- <v-btn v-on:click="count++" color="success">You clicked me {{ count }} times.</v-btn> -->
   <div>
     <v-chip close v-for="risk_field in risk_fields" :key="risk_field.id">
       <v-avatar :color="risk_field.f_color">{{ risk_field.field_type }}</v-avatar>
       {{ risk_field.field_name }}
     </v-chip>
-    <v-btn flat icon color="accent">
-      <v-icon dark>add_circle_outline</v-icon>
-    </v-btn>
+    <v-tooltip bottom>
+      <v-btn flat icon color="accent" slot="activator">
+        <v-icon dark>add_circle_outline</v-icon>
+      </v-btn>
+      <span>Add new field</span>
+    </v-tooltip>
   </div>
 </template>
 

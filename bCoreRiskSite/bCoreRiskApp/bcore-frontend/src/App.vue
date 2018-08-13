@@ -17,36 +17,13 @@
           <v-icon>more_vert</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-container>
-        <v-flex v-for="risk in risks" :key="risk.id">
-          <v-layout row wrap>
-            <v-text-field
-              name="name"
-              label="Risk Class"
-              id="risk_class_input"
-              :placeholder=" risk.risk_class "
-            >
-            </v-text-field>
-            <v-btn flat icon color="accent">
-              <v-icon dark>remove_circle_outline</v-icon>
-            </v-btn>
-          </v-layout>
-          <v-layout row wrap>
-            <risk-field v-bind:risk_id="risk.id"></risk-field>
-          </v-layout>
-        </v-flex>
-        <v-layout row wrap>
-          <v-btn fab dark color="accent">
-            <v-icon dark>add</v-icon>
-          </v-btn>          
-        </v-layout>
-      </v-container>
+      <risk-entry></risk-entry>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import riskField from './components/riskField'
+import riskEntry from './components/riskEntry'
 
 export default {
   name: 'riskApp',
@@ -61,73 +38,11 @@ export default {
     }
   },
   components: {
-    riskField
+    'risk-entry': riskEntry
   },
   mounted: function () {
-    this.getRisks()
   },
   methods: {
-    getRisks: function () {
-      this.loading = true
-      this.$http.get('/api/risk/')
-        .then((response) => {
-          this.risks = response.data
-          this.loading = false
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
-    },
-    getRisk: function (id) {
-      this.loading = true
-      this.$http.get(`/api/risk/${id}/`)
-        .then((response) => {
-          this.currentRisk = response.data
-          this.loading = false
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
-    },
-    addRisk: function () {
-      this.loading = true
-      this.$http.post('/api/risk/', this.newRisk)
-        .then((response) => {
-          this.loading = false
-          this.getRisks()
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
-    },
-    updateRisk: function () {
-      this.loading = true
-      this.$http.put(`/api/risk/${this.currentRisk.risk_id}/`, this.currentRisk)
-        .then((response) => {
-          this.loading = false
-          this.currentRisk = response.data
-          this.getRisks()
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
-    },
-    deleteRisk: function (id) {
-      this.loading = true
-      this.$http.delete(`/api/risk/${id}/`)
-        .then((response) => {
-          this.loading = false
-          this.getRisks()
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
-    }
   }
 }
 
