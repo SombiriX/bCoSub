@@ -6,25 +6,46 @@
       :key="risk_field.id"
       v-model="risk_fields[i].displayed"
       @input="
-        currentRiskField=risk_fields[i],
-        dialogOrNull(true),
+        currentRField=risk_fields[i],
+        dialogOrNull('yesNo'),
         risk_fields[i].displayed=true"
     >
-      <v-avatar :color="risk_field.f_color">{{ risk_field.field_type }}</v-avatar>
+      <v-avatar
+        :color="risk_field.f_color"
+      >
+        {{ risk_field.field_type }}
+      </v-avatar>
       {{ risk_field.field_name }}
     </v-chip>
     <v-tooltip bottom>
-      <v-btn flat icon color="accent" slot="activator">
+      <v-btn
+        flat
+        icon
+        color="accent"
+        slot="activator"
+        @click.native.stop="
+          dialogOrNull('createRField')"
+      >
         <v-icon dark>add_circle_outline</v-icon>
       </v-btn>
       <span>Add new field</span>
     </v-tooltip>
+<!-- User Action Dialogs -->
+    <component
+      v-bind:is="createRFieldDialog"
+      @riskFieldCreated = "dialogCreateRField"
+      @createRFieldDialogClosed = "createRFieldDialogClosed()"
+      v-bind:msgProps="{
+        risk_id: risk_id
+      }"
+    >
+    </component>
     <component
       v-bind:is="delRFieldDialog"
       @dialogYes = "dialogYes()"
       @dialogNo = "dialogNo()"
       v-bind:msgProps="{
-        title: 'Really delete ' + currentRiskField.field_name + '?',
+        title: 'Really delete ' + currentRField.field_name + '?',
         subtitle: 'This action cannot be undone'
       }"
     >
@@ -34,10 +55,15 @@
 
 <script>
 import yesNoDialog from './yesNoDialog'
+import createRFieldDialog from './createRFieldDialog'
 import Vue from 'vue'
 
 Vue.component('yesNoDialog', {
   template: yesNoDialog
+})
+
+Vue.component('createRFieldDialog', {
+  template: createRFieldDialog
 })
 
 export default {
@@ -48,22 +74,22 @@ export default {
     return {
       risk_fields: [],
       loading: false,
-      currentRiskField: {},
+      currentRField: {},
       message: null,
-      newRiskField: { 'field_name': null, 'field_type': null, 'field': null },
-      addRFieldDialog: false,
+      createRFieldDialog: null,
       delRFieldDialog: null,
       rFieldValid: true,
+      newRField: {},
       rules: {
         required: value => !!value || 'Required.'
       }
     }
   },
   mounted: function () {
-    this.getRiskFields()
+    this.getRFields()
   },
   methods: {
-    getRiskFields: function () {
+    getRFields: function () {
       this.loading = true
       var riskID = this.risk_id
       this.$http.get('/api/riskfield/')
@@ -92,11 +118,11 @@ export default {
         })
       this.loading = false
     },
-    getRiskField: function (id) {
+    getRField: function (id) {
       this.loading = true
       this.$http.get(`/api/riskfield/${id}/`)
         .then((response) => {
-          this.currentRiskField = response.data
+          this.currentRField = response.data
           this.loading = false
         })
         .catch((err) => {
@@ -104,37 +130,37 @@ export default {
           console.log(err)
         })
     },
-    addRiskField: function () {
+    addRField: function () {
       this.loading = true
-      this.$http.post('/api/riskfield/', this.newRiskField)
+      this.$http.post('/api/riskfield/', this.newRField)
         .then((response) => {
           this.loading = false
-          this.getRiskFields()
+          this.getRFields()
         })
         .catch((err) => {
           this.loading = false
           console.log(err)
         })
     },
-    updateRiskField: function () {
+    updateRField: function () {
       this.loading = true
-      this.$http.put(`/api/riskfield/${this.currentRiskField.risk_id}/`, this.currentRiskField)
+      this.$http.put(`/api/riskfield/${this.currentRField.risk_id}/`, this.currentRField)
         .then((response) => {
           this.loading = false
-          this.currentRiskField = response.data
-          this.getRiskFields()
+          this.currentRField = response.data
+          this.getRFields()
         })
         .catch((err) => {
           this.loading = false
           console.log(err)
         })
     },
-    deleteRiskField: function (id) {
+    deleteRField: function (id) {
       this.loading = true
       this.$http.delete(`/api/riskfield/${id}/`)
         .then((response) => {
           this.loading = false
-          this.getRiskFields()
+          this.getRFields()
         })
         .catch((err) => {
           this.loading = false
@@ -142,18 +168,29 @@ export default {
         })
     },
     dialogOrNull: function (dialog) {
-      if (dialog) {
+      if (dialog === 'yesNo') {
         this.delRFieldDialog = yesNoDialog
+      } else if (dialog === 'createRField') {
+        this.createRFieldDialog = createRFieldDialog
       } else {
         this.delRFieldDialog = null
+        this.createRFieldDialog = null
       }
     },
     dialogYes: function () {
       this.delRFieldDialog = null
-      this.deleteRiskField(this.currentRiskField.id)
+      this.deleteRField(this.currentRField.id)
     },
     dialogNo: function () {
       this.delRFieldDialog = null
+    },
+    createRFieldDialogClosed: function () {
+      this.createRFieldDialog = null
+    },
+    dialogCreateRField: function (newRField) {
+      this.createRFieldDialog = null
+      this.newRField = newRField
+      this.addRField()
     }
   }
 }

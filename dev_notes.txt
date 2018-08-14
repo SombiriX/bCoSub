@@ -34,4 +34,6 @@ Issues resolved:
 - API POST requests fail when v-model is set from text field
     - Setting the value manually works but attempting to get the value from a text field results in the server receiving the default value.
     [RESOLUTION] - Installed vue-js-cookie, to get csrf cookie
+- Get 500 Internal server error when trying to save object with foreign key (riskField)
+    - 
 

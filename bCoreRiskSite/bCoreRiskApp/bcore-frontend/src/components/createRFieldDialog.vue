@@ -4,19 +4,29 @@
       <v-dialog v-model="dialog" max-width="400">
         <v-form
           ref="rClassCreate"
-          v-model="rClassValid"
+          v-model="rFieldValid"
         >
           <v-card>
             <v-container grid-list-xs>
               <v-text-field
                 autofocus
-                label="Risk Class"
-                id="risk_class_input"
-                hint="For example: Car, House, Business, pets, etc..."
+                label="Field Name"
+                hint="For example: Height, color, weight, date, etc..."
                 :rules=[rules.required]
-                v-model="userInput"
+                v-model="newRField.field_name"
               >
               </v-text-field>
+              <v-spacer></v-spacer>
+              <v-radio-group
+                v-model="newRField.field_type"
+                label="Field Type"
+                :mandatory="true"
+              >
+                <v-radio label="Text" value="T"></v-radio>
+                <v-radio label="Number" value="N"></v-radio>
+                <v-radio label="Date" value="D"></v-radio>
+                <v-radio label="Enum" value="E"></v-radio>
+              </v-radio-group>
             </v-container>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -24,7 +34,7 @@
                 color="primary"
                 flat="flat"
                 @click.native="emitCreated()"
-                :disabled="!rClassValid"
+                :disabled="!rFieldValid"
               >
                 Create
               </v-btn>
@@ -38,14 +48,15 @@
 
 <script>
 export default {
-  name: 'createRiskDialog',
+  name: 'createRFieldDialog',
   props: ['msgProps'],
   delimiters: ['${', '}'],
   data () {
     return {
       dialog: true,
       userInput: '',
-      rClassValid: false,
+      rFieldValid: false,
+      newRField: { 'field_name': null, 'field_type': 'T', 'risk': null },
       rules: {
         required: value => !!value || 'Required.'
       }
@@ -54,7 +65,7 @@ export default {
   watch: {
     dialog (val) {
       this.clear()
-      this.$emit('createRiskDialogClosed')
+      this.$emit('createRFieldDialogClosed')
     }
   },
   mounted: function () {
@@ -64,12 +75,13 @@ export default {
       this.$refs.rClassCreate.reset()
     },
     emitCreated: function () {
-      this.$emit('riskCreated', this.userInput)
+      this.newRField.risk = this.msgProps.risk_id
+      this.$emit('riskFieldCreated', this.newRField)
       this.clear()
     },
     emitclosed: function () {
       this.clear()
-      this.$emit('createRiskDialogClosed')
+      this.$emit('createRFieldDialogClosed')
     }
   }
 }
