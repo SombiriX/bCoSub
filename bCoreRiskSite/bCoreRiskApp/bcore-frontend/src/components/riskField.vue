@@ -7,7 +7,7 @@
       v-model="risk_fields[i].displayed"
       @input="
         currentRiskField=risk_fields[i],
-        delRFieldDialog = true,
+        dialogOrNull(true),
         risk_fields[i].displayed=true"
     >
       <v-avatar :color="risk_field.f_color">{{ risk_field.field_type }}</v-avatar>
@@ -19,40 +19,27 @@
       </v-btn>
       <span>Add new field</span>
     </v-tooltip>
-    <v-layout row justify-center>
-      <v-dialog v-model="delRFieldDialog" max-width="400">
-        <v-card>
-          <v-container grid-list-xs>
-            <v-card-title class="headline">
-              Really delete "{{currentRiskField.field_name}}"?
-            </v-card-title>
-            <v-card-text>This action cannot be undone</v-card-text>
-          </v-container>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="success"
-              flat="flat"
-              @click.native="delRFieldDialog = false"
-            >
-                NO
-            </v-btn>
-            <v-btn
-              color="error"
-              flat="flat"
-              @click.native="delRFieldDialog = false,
-                deleteRiskField(currentRiskField.id)"
-            >
-                YES
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-layout>
+    <component
+      v-bind:is="delRFieldDialog"
+      @dialogYes = "dialogYes()"
+      @dialogNo = "dialogNo()"
+      v-bind:msgProps="{
+        title: 'Really delete ' + currentRiskField.field_name + '?',
+        subtitle: 'This action cannot be undone'
+      }"
+    >
+    </component>
   </div>
 </template>
 
 <script>
+import yesNoDialog from './yesNoDialog'
+import Vue from 'vue'
+
+Vue.component('yesNoDialog', {
+  template: yesNoDialog
+})
+
 export default {
   name: 'riskField',
   props: ['risk_id'],
@@ -65,7 +52,7 @@ export default {
       message: null,
       newRiskField: { 'field_name': null, 'field_type': null, 'field': null },
       addRFieldDialog: false,
-      delRFieldDialog: false,
+      delRFieldDialog: null,
       rFieldValid: true,
       rules: {
         required: value => !!value || 'Required.'
@@ -153,6 +140,20 @@ export default {
           this.loading = false
           console.log(err)
         })
+    },
+    dialogOrNull: function (dialog) {
+      if (dialog) {
+        this.delRFieldDialog = yesNoDialog
+      } else {
+        this.delRFieldDialog = null
+      }
+    },
+    dialogYes: function () {
+      this.delRFieldDialog = null
+      this.deleteRiskField(this.currentRiskField.id)
+    },
+    dialogNo: function () {
+      this.delRFieldDialog = null
     }
   }
 }
