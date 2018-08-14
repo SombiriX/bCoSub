@@ -29,6 +29,7 @@ class RiskField(models.Model):
     )
     risk = models.ForeignKey(
         Risk,
+        related_name='risk_fields',
         on_delete=models.CASCADE,
     )
     created = models.DateTimeField(auto_now_add=True)

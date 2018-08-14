@@ -56,7 +56,7 @@ export default {
       dialog: true,
       userInput: '',
       rFieldValid: false,
-      newRField: { 'field_name': null, 'field_type': 'T', 'risk': null },
+      newRField: { 'field_name': null, 'field_type': 'T', 'risk_id': null },
       rules: {
         required: value => !!value || 'Required.'
       }
@@ -75,7 +75,7 @@ export default {
       this.$refs.rClassCreate.reset()
     },
     emitCreated: function () {
-      this.newRField.risk = this.msgProps.risk_id
+      this.newRField.risk_id = this.msgProps.risk_id
       this.$emit('riskFieldCreated', this.newRField)
       this.clear()
     },
