@@ -35,5 +35,6 @@ Issues resolved:
     - Setting the value manually works but attempting to get the value from a text field results in the server receiving the default value.
     [RESOLUTION] - Installed vue-js-cookie, to get csrf cookie
 - Get 500 Internal server error when trying to save object with foreign key (riskField)
-    - 
+    - Django doesn't know what to do when attempting to create a model object with foreign key relationship.
+    - [Resolution] - Added PrimaryKeyRelatedField and create functions to RiskFieldSerializer
 

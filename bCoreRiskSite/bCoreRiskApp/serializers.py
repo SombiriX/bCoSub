@@ -28,7 +28,17 @@ class RiskFieldSerializer(serializers.ModelSerializer):
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
+    rField_id = serializers.PrimaryKeyRelatedField(queryset=RiskField.objects.all())
+
     class Meta:
         model = Choice
         fields = '__all__'
         depth = 1
+
+    def create(self, validated_data):
+        choice = Choice.objects.create(
+            choice_text=validated_data['choice_text'],
+            risk_field=validated_data['risk_field'],
+        )
+
+        return choice

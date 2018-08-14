@@ -49,7 +49,7 @@ class RiskField(models.Model):
 
 
 class Choice(models.Model):
-    choice_text = models.CharField(max_length=200, null=True)
+    choice_text = models.CharField(max_length=200)
     risk_field = models.ForeignKey(
         RiskField,
         on_delete=models.CASCADE,
