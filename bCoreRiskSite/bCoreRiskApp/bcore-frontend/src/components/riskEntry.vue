@@ -15,7 +15,7 @@
             icon
             color="accent"
             slot="activator"
-            @click.native.stop="delRiskDialog = true, currentRisk=risk"
+            @click.native.stop="dialogOrNull(true), currentRisk=risk"
           >
             <v-icon dark>remove_circle_outline</v-icon>
           </v-btn>
@@ -74,38 +74,27 @@
         </v-form>
       </v-dialog>
     </v-layout>
-    <v-layout row justify-center>
-      <v-dialog v-model="delRiskDialog" max-width="400">
-        <v-card>
-          <v-container grid-list-xs>
-            <v-card-title class="headline">
-              Really delete "{{currentRisk.risk_class}}"?
-            </v-card-title>
-            <v-card-text>This action cannot be undone</v-card-text>
-          </v-container>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="success"
-              flat="flat"
-              @click.native="delRiskDialog = false">NO</v-btn>
-            <v-btn
-              color="error"
-              flat="flat"
-              @click.native="delRiskDialog = false, deleteRisk(currentRisk.id)">
-                YES
-            </v-btn
-            >
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-layout>
+    <component
+      v-bind:is="delRiskDialog"
+      @dialogYes = "dialogYes()"
+      @dialogNo = "dialogNo()"
+      v-bind:msgProps="{
+        title: 'Really delete ' + currentRisk.risk_class + '?',
+        subtitle: 'This action cannot be undone'
+      }"
+    >
+    </component>
   </v-container>
 </template>
 
 <script>
 import riskField from './riskField'
+import yesNoDialog from './yesNoDialog'
 import Vue from 'vue'
+
+Vue.component('yesNoDialog', {
+  template: yesNoDialog
+})
 
 export default {
   name: 'riskEntry',
@@ -118,7 +107,7 @@ export default {
       message: null,
       newRiskClass: {'risk_class': ''},
       addRiskDialog: false,
-      delRiskDialog: false,
+      delRiskDialog: null,
       rClassValid: true,
       rules: {
         required: value => !!value || 'Required.'
@@ -200,6 +189,20 @@ export default {
     },
     clear: function () {
       this.$refs.rClassCreate.reset()
+    },
+    dialogOrNull: function (dialog) {
+      if (dialog) {
+        this.delRiskDialog = yesNoDialog
+      } else {
+        this.delRiskDialog = null
+      }
+    },
+    dialogYes: function () {
+      this.delRiskDialog = null
+      this.deleteRisk(this.currentRisk.id)
+    },
+    dialogNo: function () {
+      this.delRiskDialog = null
     }
   }
 }
