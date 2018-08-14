@@ -15,7 +15,6 @@ Vue.http.interceptors.push((request, next) => {
   var method = request.method
   // Check the request type
   if ((method === 'POST') || (method === 'DELETE') || (method === 'PUT')) {
-    console.log(csrftoken)
     // modify headers
     request.headers.set('X-CSRF-TOKEN', csrftoken)
     request.headers.set('X-CSRFToken', csrftoken)

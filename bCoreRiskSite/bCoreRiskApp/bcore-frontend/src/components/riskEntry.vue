@@ -15,7 +15,7 @@
             icon
             color="accent"
             slot="activator"
-            @click.native.stop="dialogOrNull(true), currentRisk=risk"
+            @click.native.stop="dialogOrNull('yesNo'), currentRisk=risk"
           >
             <v-icon dark>remove_circle_outline</v-icon>
           </v-btn>
@@ -33,47 +33,19 @@
           dark
           color="accent"
           slot="activator"
-          @click.native.stop="addRiskDialog = true">
+          @click.native.stop="dialogOrNull('createRisk')">
           <v-icon dark>add</v-icon>
         </v-btn>
         <span>New Risk Class</span>
       </v-tooltip>
     </v-layout>
 <!-- User Action Dialogs -->
-    <v-layout row justify-center>
-      <v-dialog v-model="addRiskDialog" max-width="400">
-        <v-form
-          ref="rClassCreate"
-          v-model="rClassValid"
-          lazy-validation
-        >
-          <v-card>
-            <v-container grid-list-xs>
-              <v-text-field
-                autofocus
-                label="Risk Class"
-                id="risk_class_input"
-                hint="For example: Car, House, Business, pets, etc..."
-                :rules=[rules.required]
-                v-model="newRiskClass.risk_class"
-              >
-              </v-text-field>
-            </v-container>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                flat="flat"
-                @click.native="addRiskDialog = false, addRisk(), clear()"
-                :disabled="!rClassValid"
-              >
-                Create
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-form>
-      </v-dialog>
-    </v-layout>
+    <component
+      v-bind:is="createRiskDialog"
+      @riskCreated = "dialogCreateRisk"
+      @createRiskDialogClosed = "createRiskDialogClosed()"
+    >
+    </component>
     <component
       v-bind:is="delRiskDialog"
       @dialogYes = "dialogYes()"
@@ -90,10 +62,15 @@
 <script>
 import riskField from './riskField'
 import yesNoDialog from './yesNoDialog'
+import createRiskDialog from './createRiskDialog'
 import Vue from 'vue'
 
 Vue.component('yesNoDialog', {
   template: yesNoDialog
+})
+
+Vue.component('createRiskDialog', {
+  template: createRiskDialog
 })
 
 export default {
@@ -106,12 +83,8 @@ export default {
       currentRisk: {},
       message: null,
       newRiskClass: {'risk_class': ''},
-      addRiskDialog: false,
-      delRiskDialog: null,
-      rClassValid: true,
-      rules: {
-        required: value => !!value || 'Required.'
-      }
+      createRiskDialog: null,
+      delRiskDialog: null
     }
   },
   components: {
@@ -147,11 +120,7 @@ export default {
     },
     addRisk: function () {
       this.loading = true
-      this.$http.post('/api/risk/', this.newRiskClass, {
-        headers: {
-          'X-CSRFToken': Vue.cookie.get('csrftoken')
-        }
-      })
+      this.$http.post('/api/risk/', this.newRiskClass)
         .then((response) => {
           this.loading = false
           this.getRisks()
@@ -187,14 +156,14 @@ export default {
           console.log(err)
         })
     },
-    clear: function () {
-      this.$refs.rClassCreate.reset()
-    },
     dialogOrNull: function (dialog) {
-      if (dialog) {
+      if (dialog === 'yesNo') {
         this.delRiskDialog = yesNoDialog
+      } else if (dialog === 'createRisk') {
+        this.createRiskDialog = createRiskDialog
       } else {
         this.delRiskDialog = null
+        this.createRiskDialog = null
       }
     },
     dialogYes: function () {
@@ -203,6 +172,14 @@ export default {
     },
     dialogNo: function () {
       this.delRiskDialog = null
+    },
+    createRiskDialogClosed: function () {
+      this.createRiskDialog = null
+    },
+    dialogCreateRisk: function (userInput) {
+      this.createRiskDialog = null
+      this.newRiskClass.risk_class = userInput
+      this.addRisk()
     }
   }
 }
