@@ -9,6 +9,9 @@
         currentRField=risk_fields[i],
         dialogOrNull('yesNo'),
         risk_fields[i].displayed=true"
+      @click.native="
+        currentRField=risk_fields[i],
+        dialogOrNull('createRField')"
     >
       <v-avatar
         :color="risk_field.f_color"
@@ -35,8 +38,9 @@
       v-bind:is="createRFieldDialog"
       @riskFieldCreated = "dialogCreateRField"
       @createRFieldDialogClosed = "createRFieldDialogClosed()"
-      v-bind:msgProps="{
-        risk_id: risk_id
+      v-bind:dlgProps="{
+        risk_id: risk_id,
+        updateField: currentRField
       }"
     >
     </component>
@@ -44,7 +48,7 @@
       v-bind:is="delRFieldDialog"
       @dialogYes = "dialogYes()"
       @dialogNo = "dialogNo()"
-      v-bind:msgProps="{
+      v-bind:dlgProps="{
         title: 'Really delete ' + currentRField.field_name + '?',
         subtitle: 'This action cannot be undone'
       }"

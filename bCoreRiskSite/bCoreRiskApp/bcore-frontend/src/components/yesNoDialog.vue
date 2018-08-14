@@ -5,9 +5,9 @@
         <v-card>
           <v-container grid-list-xs>
             <v-card-title class="headline">
-              {{ msgProps.title }}
+              {{ dlgProps.title }}
             </v-card-title>
-            <v-card-text>{{ msgProps.subtitle }}</v-card-text>
+            <v-card-text>{{ dlgProps.subtitle }}</v-card-text>
           </v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -35,7 +35,7 @@
 <script>
 export default {
   name: 'yesNoDialog',
-  props: ['msgProps'],
+  props: ['dlgProps'],
   delimiters: ['${', '}'],
   data () {
     return {

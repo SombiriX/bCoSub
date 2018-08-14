@@ -49,7 +49,7 @@
 <script>
 export default {
   name: 'createRFieldDialog',
-  props: ['msgProps'],
+  props: ['dlgProps'],
   delimiters: ['${', '}'],
   data () {
     return {
@@ -75,7 +75,7 @@ export default {
       this.$refs.rClassCreate.reset()
     },
     emitCreated: function () {
-      this.newRField.risk_id = this.msgProps.risk_id
+      this.newRField.risk_id = this.dlgProps.risk_id
       this.$emit('riskFieldCreated', this.newRField)
       this.clear()
     },
