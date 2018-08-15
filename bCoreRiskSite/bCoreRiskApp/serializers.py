@@ -26,6 +26,15 @@ class RiskFieldSerializer(serializers.ModelSerializer):
 
         return rField
 
+    def update(self, rField, validated_data):
+        # Update the existing field
+        # continue with existing data if inputs are None
+        rField.field_name = validated_data.get('field_name', rField.field_name)
+        rField.field_type = validated_data.get('field_type', rField.field_type)
+        rField.risk = validated_data.get('risk_id', rField.risk)
+        rField.save()
+        return rField
+
 
 class ChoiceSerializer(serializers.ModelSerializer):
     rField_id = serializers.PrimaryKeyRelatedField(queryset=RiskField.objects.all())
@@ -41,4 +50,12 @@ class ChoiceSerializer(serializers.ModelSerializer):
             risk_field=validated_data['risk_field'],
         )
 
+        return choice
+
+    def update(self, choice, validated_data):
+        # Update the existing field
+        # continue with existing data if inputs are None
+        choice.choice_text = validated_data.get('choice_text', choice.choice_text)
+        choice.risk_field = validated_data.get('risk_field', choice.risk_field)
+        choice.save()
         return choice
