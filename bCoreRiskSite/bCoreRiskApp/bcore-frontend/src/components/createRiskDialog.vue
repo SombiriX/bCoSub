@@ -5,6 +5,7 @@
         <v-form
           ref="rClassCreate"
           v-model="rClassValid"
+          @submit.prevent="submit()"
         >
           <v-card>
             <v-container grid-list-xs>
@@ -23,8 +24,7 @@
               <v-btn
                 color="primary"
                 flat="flat"
-                @click.native="emitCreated()"
-                :disabled="!rClassValid"
+                type="submit"
               >
                 Create
               </v-btn>
@@ -70,6 +70,12 @@ export default {
     emitclosed: function () {
       this.clear()
       this.$emit('createRiskDialogClosed')
+    },
+    submit: function () {
+      // Capture form submission
+      if (this.$refs.rClassCreate.validate()) {
+        this.emitCreated()
+      }
     }
   }
 }

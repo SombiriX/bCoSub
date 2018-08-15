@@ -35,7 +35,6 @@
                 color="primary"
                 flat="flat"
                 type="submit"
-                :disabled="!rFieldValid"
               >
                 {{ update ? 'Update' : 'Create' }}
               </v-btn>
