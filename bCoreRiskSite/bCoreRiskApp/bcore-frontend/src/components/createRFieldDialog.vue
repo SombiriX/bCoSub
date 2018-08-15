@@ -31,7 +31,10 @@
               <!-- Only display the choice table for enum types -->
               <choiceTable
                 v-if="newRField.field_type === 'E'"
-                v-bind:rFieldID="dlgProps.updateField.id"
+                v-bind:dlgProps="{
+                  rFieldID: dlgProps.updateField.id,
+                  update: update
+                }"
               >
               </choiceTable>
             </v-container>

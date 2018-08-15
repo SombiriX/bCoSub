@@ -9,24 +9,54 @@
       ></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
-        <v-btn slot="activator" color="accent" dark class="mb-2">Add new choice</v-btn>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-            <v-container grid-list-xs>
-              <v-layout row wrap>
-                <v-flex>
-                  <v-text-field v-model="newChoice.choice_text" label="Choice Text"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="accent" flat @click.native="close()">Cancel</v-btn>
-            <v-btn color="accent" flat @click.native="save()">Save</v-btn>
-          </v-card-actions>
-        </v-card>
+        <v-btn
+          slot="activator"
+          color="accent"
+          dark
+          class="mb-2">
+            Add new choice
+        </v-btn>
+        <v-form
+          ref="choiceCreate"
+          v-model="choiceValid"
+          @submit.prevent="submitChoice()"
+        >
+          <v-card>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+              <v-container grid-list-xs>
+                <v-layout row wrap>
+                  <v-flex>
+                    <v-text-field
+                      v-model="newChoice.choice_text"
+                      label="Choice Text"
+                      hint="Add an option for this enumerated type"
+                      :rules=[rules.required]
+                    >
+                    </v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="accent"
+                flat
+                @click.native="close()"
+              >
+                Cancel
+              </v-btn>
+              <v-btn 
+                type="submit"
+                color="accent"
+                flat
+              >
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-form>
       </v-dialog>
     </v-toolbar>
     <v-data-table
@@ -35,24 +65,24 @@
       hide-actions
       class="elevation-1"
     >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.choice_text }}</td>
-        <td class="justify-center layout px-0">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="deleteItem(props.item)"
-          >
-            delete
-          </v-icon>
-        </td>
-      </template>
+    <template slot="items" slot-scope="props">
+      <td>{{ props.item.choice_text }}</td>
+      <td class="justify-center layout px-0">
+        <v-icon
+          small
+          class="mr-2"
+          @click="editItem(props.item)"
+        >
+          edit
+        </v-icon>
+        <v-icon
+          small
+          @click="deleteItem(props.item)"
+        >
+          delete
+        </v-icon>
+      </td>
+    </template>
     </v-data-table>
   </div>
 </template>
@@ -60,20 +90,28 @@
 <script>
 export default {
   name: 'choiceTable',
-  props: ['rFieldID'],
+  props: ['dlgProps'],
   data () {
     return {
       dialog: false,
       choices: [],
       editedIndex: -1,
+      choiceValid: false,
       newChoice: {
         choice_text: '',
-        risk_field: ''
+        risk_field: this.dlgProps.rFieldID
+      },
+      currentChoice: {
+        choice_text: '',
+        risk_field: this.dlgProps.rFieldID
+      },
+      rules: {
+        required: value => !!value || 'Required.'
       }
     }
   },
   computed: {
-    formTitle () {
+    formTitle: function() {
       return this.editedIndex === -1 ? 'New choice' : 'Edit choice'
     }
   },
@@ -88,7 +126,7 @@ export default {
   methods: {
     getChoices: function () {
       this.loading = true
-      var rFieldID = this.rFieldID
+      var rFieldID = this.dlgProps.rFieldID
       this.$http.get('/api/choice/')
         .then((response) => {
           this.choices = response.data.filter(function (choice) {
@@ -142,11 +180,19 @@ export default {
           console.log(err)
         })
     },
-    submitChoice: function (i) {
-      // Capture form submission
-      if (this.$refs.rClass[i].validate()) {
-        this.currentChoice = this.choices[i]
-        this.updateChoice()
+    submitChoice: function () {
+      // Validate form submission
+      if (this.$refs.choiceCreate.validate()) {
+        this.currentChoice = Object.assign({}, this.newChoice)
+        if (this.editedIndex > -1) {
+          // Update Choice
+          this.updateChoice()
+        } else {
+          // Create new Choice
+          this.addChoice()
+        }
+        // Clear
+        this.close()
       }
     },
     deleteChoice: function (id) {
@@ -189,24 +235,15 @@ export default {
     close: function () {
       this.dialog = false
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
+        this.newChoice.choice_text = ''
         this.editedIndex = -1
       }, 300)
     },
-    save: function () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.choices[this.editedIndex], this.editedItem)
-      } else {
-        this.choices.push(this.editedItem)
-      }
-      this.close()
-    },
     editItem: function (item) {
       this.editedIndex = this.choices.indexOf(item)
-      this.editedItem = Object.assign({}, item)
+      this.newChoice = Object.assign({}, item)
       this.dialog = true
     },
-
     deleteItem: function (item) {
       const index = this.choices.indexOf(item)
       confirm('Are you sure you want to delete this item?') && this.choices.splice(index, 1)
