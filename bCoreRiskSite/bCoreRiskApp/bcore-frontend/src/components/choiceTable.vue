@@ -84,10 +84,27 @@
       </td>
     </template>
     </v-data-table>
+    <component
+      v-bind:is="delChoiceDialog"
+      @dialogYes = "dialogYes()"
+      @dialogNo = "dialogNo()"
+      v-bind:dlgProps="{
+        title: 'Really delete ' + currentChoice.choice_text + '?',
+        subtitle: 'This action cannot be undone'
+      }"
+    >
+    </component>
   </div>
 </template>
 
 <script>
+import yesNoDialog from './yesNoDialog'
+import Vue from 'vue'
+
+Vue.component('yesNoDialog', {
+  template: yesNoDialog
+})
+
 export default {
   name: 'choiceTable',
   props: ['dlgProps'],
@@ -97,6 +114,7 @@ export default {
       choices: [],
       editedIndex: -1,
       choiceValid: false,
+      delChoiceDialog: null,
       newChoice: {
         choice_text: '',
         risk_field: this.dlgProps.rFieldID
@@ -245,8 +263,8 @@ export default {
       this.dialog = true
     },
     deleteItem: function (item) {
-      const index = this.choices.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.choices.splice(index, 1)
+      this.currentChoice=item
+      this.dialogOrNull('yesNo')
     }
   }
 }
