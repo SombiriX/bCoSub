@@ -5,6 +5,7 @@
         <v-form
           ref="rClassCreate"
           v-model="rFieldValid"
+          @submit.prevent="submit()"
         >
           <v-card>
             <v-container grid-list-xs>
@@ -33,10 +34,10 @@
               <v-btn
                 color="primary"
                 flat="flat"
-                @click.native="emitCreated()"
+                type="submit"
                 :disabled="!rFieldValid"
               >
-                Create
+                {{ update ? 'Update' : 'Create' }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -56,6 +57,7 @@ export default {
       dialog: true,
       userInput: '',
       rFieldValid: false,
+      update: false,
       newRField: { 'field_name': null, 'field_type': 'T', 'risk_id': null },
       rules: {
         required: value => !!value || 'Required.'
@@ -69,19 +71,55 @@ export default {
     }
   },
   mounted: function () {
+    if (this.isUpdate()) {
+      this.newRField = this.dlgProps.updateField
+      this.update = true
+    }
   },
   methods: {
+    isUpdate: function () {
+      // Check if we're updating or creating
+      var updateField = this.dlgProps.updateField
+      var objHasNoKeys = (Object.keys(updateField).length === 0)
+      var objIsNotObj = !(updateField.constructor === Object)
+
+      var numUndefined = Object.keys(updateField)
+        .filter(field => !updateField[field]).length
+
+      return !(objHasNoKeys || objIsNotObj || (numUndefined > 0))
+    },
     clear: function () {
+      // Clears all form inputs
       this.$refs.rClassCreate.reset()
     },
     emitCreated: function () {
+      // Emits event for form creation
+      // Along with the user's input data
       this.newRField.risk_id = this.dlgProps.risk_id
       this.$emit('riskFieldCreated', this.newRField)
       this.clear()
     },
+    emitUpdated: function () {
+      // Emits event for field update
+      // Along with the user's input data
+      this.newRField.risk_id = this.dlgProps.risk_id
+      this.$emit('riskFieldUpdated', this.newRField)
+      this.clear()
+    },
     emitclosed: function () {
+      // Emits event for form closure
       this.clear()
       this.$emit('createRFieldDialogClosed')
+    },
+    submit: function () {
+      // Capture form submission
+      if (this.$refs.rClassCreate.validate()) {
+        if (this.update) {
+          this.emitUpdated()
+        } else {
+          this.emitCreated()
+        }
+      }
     }
   }
 }

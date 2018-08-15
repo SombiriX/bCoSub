@@ -37,4 +37,8 @@ Issues resolved:
 - Get 500 Internal server error when trying to save object with foreign key (riskField)
     - Django doesn't know what to do when attempting to create a model object with foreign key relationship.
     - [Resolution] - Added PrimaryKeyRelatedField and create functions to RiskFieldSerializer
+- Clicking a chip element causes the chip's text to disappear
+    - Passing objects as props causes 2-way binding which leads to undesired/ wierd results
+    - [Resolution] - Create new object made of fields from existing object to pass
+
 

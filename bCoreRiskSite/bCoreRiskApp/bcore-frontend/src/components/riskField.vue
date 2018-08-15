@@ -9,7 +9,7 @@
         currentRField=risk_fields[i],
         dialogOrNull('yesNo'),
         risk_fields[i].displayed=true"
-      @click.native="
+      @click.native.stop="
         currentRField=risk_fields[i],
         dialogOrNull('createRField')"
     >
@@ -27,6 +27,7 @@
         color="accent"
         slot="activator"
         @click.native.stop="
+          currentRField={},
           dialogOrNull('createRField')"
       >
         <v-icon dark>add_circle_outline</v-icon>
@@ -37,10 +38,16 @@
     <component
       v-bind:is="createRFieldDialog"
       @riskFieldCreated = "dialogCreateRField"
+      @riskFieldUpdated = "dialogUpdateRField"
       @createRFieldDialogClosed = "createRFieldDialogClosed()"
       v-bind:dlgProps="{
         risk_id: risk_id,
-        updateField: currentRField
+        updateField: {
+          'field_name': currentRField.field_name,
+          'field_type': currentRField.field_type,
+          'id': currentRField.id,
+          'risk_id': currentRField.risk_id
+        }
       }"
     >
     </component>
@@ -148,7 +155,7 @@ export default {
     },
     updateRField: function () {
       this.loading = true
-      this.$http.put(`/api/riskfield/${this.currentRField.risk_id}/`, this.currentRField)
+      this.$http.put(`/api/riskfield/${this.currentRField.id}/`, this.currentRField)
         .then((response) => {
           this.loading = false
           this.currentRField = response.data
@@ -195,6 +202,11 @@ export default {
       this.createRFieldDialog = null
       this.newRField = newRField
       this.addRField()
+    },
+    dialogUpdateRField: function (newRField) {
+      this.createRFieldDialog = null
+      this.currentRField = newRField
+      this.updateRField()
     }
   }
 }

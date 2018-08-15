@@ -4,6 +4,118 @@
 		"selected_items":
 		[
 			[
+				"obj",
+				"objIsObj〔variable〕"
+			],
+			[
+				"field",
+				"field_type"
+			],
+			[
+				"ri",
+				"risk_field"
+			],
+			[
+				"risk",
+				"risk_id"
+			],
+			[
+				"dial",
+				"dialogOrNull"
+			],
+			[
+				"new",
+				"newRiskClass〔variable〕"
+			],
+			[
+				"emi",
+				"emitCreated"
+			],
+			[
+				"fun",
+				"function〔keyword〕"
+			],
+			[
+				"vform",
+				"vFormWithProps	v-form with all props - Vuetify"
+			],
+			[
+				"vfor",
+				"vFormTemplateValidation	v-from template for Validation with submit & clear - Vuetify"
+			],
+			[
+				"vcontainer",
+				"vContainer	v-container component - Vuetify"
+			],
+			[
+				"vdialogtemp",
+				"vDialogTemplateWitoutActivator	v-dialog template without activator - Vuetify"
+			],
+			[
+				"b",
+				"bCoreRiskSite"
+			],
+			[
+				"jus",
+				"justifyCenter	justify-center - Vuetify"
+			],
+			[
+				"just",
+				"justifySpaceAround	justify-space-around - Vuetify"
+			],
+			[
+				"justify-",
+				"justifyEnd	justify-end - Vuetify"
+			],
+			[
+				"vdialog",
+				"vDialogTemplateWitoutActivator	v-dialog template without activator - Vuetify"
+			],
+			[
+				"vbt",
+				"vBtnIcon	v-btn as icon - Vuetify"
+			],
+			[
+				"xs",
+				"xl1	container width 1 in extra large size - Vuetify"
+			],
+			[
+				"vbtnr",
+				"vBtnRound	v-btn with round prop - Vuetify"
+			],
+			[
+				"vbtn",
+				"vBtn	v-btn component - Vuetify"
+			],
+			[
+				"tru",
+				"trueValue	true-value - Vuetify"
+			],
+			[
+				"inp",
+				"input	input - Vuetify"
+			],
+			[
+				"vi",
+				"vIconFontAwesome	v-icon with font awesome - Vuetify"
+			],
+			[
+				"vicon",
+				"vIconFontAwesome	v-icon with font awesome - Vuetify"
+			],
+			[
+				"vbtnf",
+				"vBtnFlat	v-btn with flat prop example - Vuetify"
+			],
+			[
+				"vtool",
+				"vToolbarItems	v-toolbar-items component  - Vuetify"
+			],
+			[
+				"v-btn",
+				"vBtnIcon	v-btn as icon - Vuetify"
+			],
+			[
 				"None",
 				"None〔variable〕"
 			],
@@ -252,10 +364,6 @@
 				"ingredients_dict〔variable〕"
 			],
 			[
-				"new",
-				"new_ing_id〔variable〕"
-			],
-			[
 				"test",
 				"test_database"
 			],
@@ -305,10 +413,6 @@
 			],
 			[
 				"inpu",
-				"input_dict〔variable〕"
-			],
-			[
-				"inp",
 				"input_dict〔variable〕"
 			],
 			[
@@ -410,178 +514,73 @@
 			[
 				"uint",
 				"uint8_t"
-			],
-			[
-				"ptr",
-				"ptr_in_buff"
-			],
-			[
-				"wrt",
-				"write_ptr"
-			],
-			[
-				"uin",
-				"uint32_t"
-			],
-			[
-				"buf",
-				"BUF_SIZE"
-			],
-			[
-				"fra",
-				"frame_buffer1"
-			],
-			[
-				"meas",
-				"measure_var"
-			],
-			[
-				"mea",
-				"measure_id"
-			],
-			[
-				"prov",
-				"provider_id"
-			],
-			[
-				"fram",
-				"frame_buffer"
-			],
-			[
-				"shi",
-				"shift_array"
-			],
-			[
-				"at_",
-				"at_EOF"
-			],
-			[
-				"add",
-				"addr"
-			],
-			[
-				"L",
-				"location"
-			],
-			[
-				"all",
-				"all_comment_text〔variable〕"
-			],
-			[
-				"line",
-				"line3〔variable〕"
-			],
-			[
-				"lin",
-				"line2〔variable〕"
-			],
-			[
-				"ra",
-				"raw_input〔function〕"
-			],
-			[
-				"txt",
-				"txt_again〔variable〕"
-			],
-			[
-				"file",
-				"filename"
-			],
-			[
-				"bit",
-				"bit_len"
-			],
-			[
-				"ret",
-				"return〔keyword〕"
-			],
-			[
-				"b",
-				"b_str"
-			],
-			[
-				"cha",
-				"characters"
-			],
-			[
-				"lcs",
-				"lcs_other"
-			],
-			[
-				"race",
-				"race_time"
-			],
-			[
-				"elapsed",
-				"elapsed_time_mins"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "bCoreRiskSite/bCoreRiskApp/views.py",
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
 			"settings":
 			{
-				"buffer_size": 163,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bCoreRiskSite/bCoreRiskSite/urls.py",
-			"settings":
-			{
-				"buffer_size": 813,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bCoreRiskSite/bCoreRiskApp/urls.py",
-			"settings":
-			{
-				"buffer_size": 109,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "bCoreRiskSite/bCoreRiskSite/settings.py",
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/public/index.html",
 			"settings":
 			{
-				"buffer_size": 3218,
-				"line_ending": "Unix"
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/main.js",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "bCoreRiskSite/bCoreRiskApp/models.py",
 			"settings":
 			{
-				"buffer_size": 1711,
-				"line_ending": "Unix"
+				"buffer_size": 0,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "notes.txt",
+			"file": "dev_notes.txt",
 			"settings":
 			{
-				"buffer_size": 680,
-				"line_ending": "Windows",
-				"name": "Design Notes:"
+				"buffer_size": 0,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "bCoreRiskSite/bCoreRiskApp/admin.py",
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskField.vue",
 			"settings":
 			{
-				"buffer_size": 163,
-				"line_ending": "Unix"
+				"buffer_size": 0,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskEntry.vue",
 			"settings":
 			{
-				"buffer_size": 170,
-				"line_ending": "Unix"
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/createRFieldDialog.vue",
+			"settings":
+			{
+				"buffer_size": 2645,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -592,11 +591,11 @@
 		"selected_items":
 		[
 			[
-				"pc",
+				"pci",
 				"Package Control: Install Package"
 			],
 			[
-				"pci",
+				"pc",
 				"Package Control: Install Package"
 			],
 			[
@@ -637,7 +636,43 @@
 	},
 	"file_history":
 	[
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/serializers.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/yesNoDialog.vue",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/createRiskDialog.vue",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/createRiskFieldDialog.vue",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskSite/settings.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/plugins/vue-deepset.js",
+		"/C/Users/sombiri/Desktop/temp/temp1.txt",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/plugins/vue-js-cookie.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/plugins/vuetify.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/node_modules/vue-js-cookie/example/example.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/plugins/bootstrap-vue.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskSite/urls.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/views.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/viewsets.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskSite/routers.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/router.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/plugins/vue-resource.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/node_modules/vue-resource/package.json",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/views/Home.vue",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/HelloWorld.vue",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/package.json",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/webpack-stats.json",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/admin.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/vue.config.js",
+		"/Z/bCoSub/notes.txt",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/templates/client/index.html",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/main.js",
+		"/Z/temp/temp/src/main.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/public/index.html",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/dist/bundle.js",
 		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/node_modules/vue-cli-plugin-vuetify/README.md",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/package-lock.json",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/node_modules/webpack/package.json",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/bcore-frontend/babel.config.js",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/routers.py",
+		"/Z/bCoSub/bCoreRiskSite/bCoreRiskApp/urls.py",
 		"/C/Users/sombiri/Desktop/temp/w210/scratch.py",
 		"/C/Users/sombiri/Documents/Job_search/Art&Logic/solution.cpp",
 		"/C/Users/sombiri/Documents/Job_search/cover_letter/doximity_tool_list",
@@ -728,43 +763,7 @@
 		"/C/Users/sombiri/Documents/software/w210/tingwen_w210_capstone/Server/load_data_to_mongo.py",
 		"/C/Users/sombiri/Documents/software/w210/tingwen_w210_capstone/App_Inventor/src/appinventor/ai_sombiri/Capstone/new_user_screen1.bky",
 		"/C/Users/sombiri/Documents/software/w266/convert.py",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/bin/states",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/lib/processing/dotmap/data/zoomlevel",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/lib/processing/dotmap/dotmap.pde",
-		"/C/Users/sombiri/Documents/software/w209/w209_final_project/d3_vis/js/index.js",
-		"/C/Users/sombiri/Documents/software/w209/w209_final_project/d3_vis/css/style.css",
-		"/C/Users/sombiri/Documents/software/w209/w209_final_project/d3_vis/index.html",
-		"/E/W210_Capstone/Server/cosmetics_app.py",
-		"/C/Users/sombiri/Documents/software/w266/trainingSet_conversions/SQuAD/dev-v1.1.json",
-		"/C/Users/sombiri/Documents/software/w266/test.csv",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/RacialDotMap/dotfile.py",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/RacialDotMap/globalmaptiles.py",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/Vagrantfile",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/manifests/precise.pp",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/bin/makecsv.sh",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/bin/bashsort.sh",
-		"/C/Users/sombiri/.ssh/w266_server.pub",
-		"/C/Users/sombiri/.ssh/w266_server_w209.pub",
-		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/index.html",
-		"/C/Users/sombiri/Documents/software/w209/RacialDotMap/globalmaptiles.py",
-		"/C/Users/sombiri/Documents/software/w209/w209/w209.py",
-		"/C/Users/sombiri/Documents/software/w209/w209/pip-selfcheck.json",
-		"/E/W210_Capstone/Server/cosmetics_app_old.py",
-		"/C/Users/sombiri/Documents/software/w210/tingwen_w210_capstone/Server/cosmetics_app.py",
-		"/C/Users/sombiri/.matplotlib/wk9Style.mplstyle",
-		"/C/Users/sombiri/.matplotlib/stylelib/wk9Style.mplstyle",
-		"/C/Users/sombiri/.jupyter/jupyter_notebook_config.json",
-		"/C/Users/sombiri/Documents/software/w209/wk9_async/Lekagul Sensor Data.csv",
-		"/C/Users/sombiri/Documents/software/w210/w210_capstone/ewg_scraper/ewg_scraper/spiders/ewg_skindeep.py",
-		"/C/Users/sombiri/Desktop/temp/w266/a4/rnnlm.py",
-		"/C/Users/sombiri/Documents/software/w210/w210_capstone/ewg_scraper/ewg_scraper/pipelines.py",
-		"/E/W210_Capstone/Server/db_crud.py",
-		"/E/W210_Capstone/Server/load_data_to_mongo.py",
-		"/C/Users/sombiri/Documents/software/w210/db_dump_people.json",
-		"/C/Kerbal Space Program/KSP.log",
-		"/C/Users/sombiri/Documents/software/w210/db_dump_comodegenic.json",
-		"/C/Users/sombiri/Documents/software/w210/w210_capstone/EWG_Analysi/comodegenic.json",
-		"/C/Users/sombiri/Documents/software/w210/w210_capstone/EWG_Analysi/csv-json.py"
+		"/C/Users/sombiri/Documents/software/w209/dotmapRepos/dotmap/bin/states"
 	],
 	"find":
 	{
@@ -775,6 +774,8 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"Z:\\bCoSub\\bCoreRiskSite\\bCoreRiskApp\\bcore-frontend\\src",
+			"Z:\\bCoSub\\bCoreRiskSite\\bCoreRiskApp\\bcore-frontend\\",
 			"C:\\Users\\sombiri\\Documents\\software\\w209\\w209_final_project\\website",
 			"C:\\Users\\sombiri\\Documents\\software\\w210\\tingwen_repo\\W210_Capstone\\App_Inventor",
 			"C:\\Users\\sombiri\\Documents\\software\\w210\\tingwen_repo\\W210_Capstone\\App_Inventor\\youngandroidproject",
@@ -785,9 +786,129 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"objHasLen",
+			"dlgProps",
+			"r",
+			"x",
+			"field_name",
+			"msgProps\nmsgProps\nmsgProps",
+			"msgProps",
+			"risk_field",
+			"rField",
+			"validated_data",
+			"risk",
+			"'",
+			"risk_field",
+			"currentRisk",
+			" ",
+			"rFieldValid",
+			"newRiskClass",
+			"rFieldValid",
+			"e",
+			"rClassValid",
+			"dialogCreateRField",
+			"createRFieldDialogClosed",
+			"createRiskFieldDialogClosed",
+			"createRiskFieldDialog",
+			"yesNoDialog",
+			"createRiskDialog",
+			"RiskField",
+			"createRiskFieldDialog",
+			"createRiskDialog",
+			"CreateRiskField",
+			"createRiskField",
+			"delRFieldDialog",
+			"delRiskFieldDialog",
+			"delRiskDialog",
+			"dialogOrNull",
+			" ",
+			"add",
+			"createRFieldDialog",
+			"addRFieldDialog",
+			"dialogCreateRiskField",
+			"dialogCreateRisk",
+			"createRiskFieldDialogClosed",
+			"dialogCreateRiskField",
+			"createRiskDialogClosed",
+			"riskCreated",
+			"addRFieldDialog",
+			"userInput",
+			"mode",
+			"dialogClosed",
+			"addRiskDialog",
+			"dialogOrNull",
+			"user_input",
+			"addRiskDialog",
+			" ",
+			"msgProps",
+			"yesNoDialog",
+			"'\n",
+			"delRiskDialog",
+			"delRFieldDialog",
+			" method",
+			";",
+			"delRiskDialog",
+			" ",
+			"dialog",
+			" ",
+			"newRiskClass",
+			"newRisk",
+			"csrf",
+			"container",
+			"div",
+			"#",
+			"'#",
+			"color",
+			"{",
+			"AA3939",
+			"color",
+			"btn",
+			"MAP",
+			"risk_field",
+			"ul",
+			"lass=\"list\">\n  </ul>",
+			"<v-btn >",
+			"risk_field",
+			"risks",
+			"risk",
+			"Risk",
+			"risk",
+			"HelloWorld",
+			"task",
+			"Task",
+			"task",
+			"Task",
+			"task",
+			"Task",
+			"task",
+			"Task",
+			"task",
+			"Task",
+			"task",
+			"Task",
+			"task",
+			"Task",
+			"task",
+			"`",
+			"(`/",
+			"'",
+			"api",
+			"getTasks",
+			";",
+			"function",
+			"root",
+			"webpack = require('webpack')",
+			"r’article’",
+			"ArticleViewSet",
+			",",
+			"ArticleSerializer",
+			"Article",
+			"ArticleViewSet",
+			"Article",
+			"ArticleSerializer",
 			"editable",
 			"updated_at",
 			"created_at",
@@ -795,127 +916,7 @@
 			"field_text",
 			"TXT",
 			"TASK_TYPE_CHOICES",
-			"_id",
-			"field_text_id",
-			"owner_person",
-			"owner_person_id",
-			"owner_group_id",
-			"foreig",
-			"input",
-			"decodeFunction",
-			"encodeFunction",
-			"    ",
-			"Rosetta",
-			"string",
-			"endl",
-			"hex",
-			"dec",
-			"file",
-			"encodeFile",
-			"\\r",
-			"std::",
-			"myfile",
-			"tDecoded",
-			"uint8_t",
-			"high",
-			"task_heading",
-			"Heading",
-			"Body",
-			"task_body",
-			"Article",
-			"article",
-			"`",
-			"’",
-			"‘",
-			"task",
-			"article",
-			"article_id",
-			"L",
-			"ARTICLE",
-			"Articles",
-			"article",
-			"articles",
-			"article",
-			"Article",
-			"article",
-			"Article",
-			"starting",
-			"#",
-			"’",
-			"‘",
-			"”",
-			"→",
-			"<! —",
-			"TaskViewSet",
-			",",
-			"TaskViewSet",
-			"TaskSerializer",
-			"Task",
-			"TaskViewSet",
-			"'),",
-			"\"",
-			"home",
-			"=\"",
-			"\"",
-			",",
-			"Task",
-			"TaskSerializer",
-			"Article",
-			"tb_app_signup",
-			"tb_app_views",
-			"signup",
-			"ext-decoration",
-			"color",
-			"no-list",
-			"text-decoration:underline",
-			"a:hover",
-			"text",
-			"a\\.",
-			"social-list-2",
-			"hov",
-			"link",
-			"h1",
-			"h3",
-			"CharFields",
-			"Continuous",
-			"sqlite3",
-			"JBS Custom Software Solutions",
-			"Software Engineer",
-			"Software",
-			"software",
-			"Software",
-			"Software Engineer",
-			"BriteCore",
-			"box_version",
-			"position",
-			"Full-stack Engineer",
-			"Full-Stack Engineer",
-			"Full Stack Engineer",
-			"Unhaggle",
-			"Analytics Fire",
-			"Analytics",
-			"pursued",
-			"Data Scientist",
-			"Dataquest",
-			"Engineer",
-			"engineer",
-			"Engineer",
-			"Blue Orange",
-			"various",
-			"Joya",
-			"position",
-			"Engineer",
-			"engineer",
-			"Engineer",
-			"Senior Software Engineer",
-			"Python",
-			"Analytics Fire",
-			"Rejoiner",
-			"Action Verb",
-			"vx",
-			"3x",
-			"color",
-			"backgr"
+			"_id"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1038,18 +1039,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "bCoreRiskSite/bCoreRiskApp/views.py",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
 					"settings":
 					{
-						"buffer_size": 163,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								163,
-								163
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1145,7 +1146,9 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1155,18 +1158,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "bCoreRiskSite/bCoreRiskSite/urls.py",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/public/index.html",
 					"settings":
 					{
-						"buffer_size": 813,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								707,
-								707
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1262,7 +1265,9 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1272,18 +1277,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "bCoreRiskSite/bCoreRiskApp/urls.py",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/main.js",
 					"settings":
 					{
-						"buffer_size": 109,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								109,
-								109
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1357,6 +1362,10 @@
 							[
 							],
 							"pyflakes_ignore_import_*": true,
+							"rulers":
+							[
+								80
+							],
 							"sublimelinter": "load-save",
 							"sublimelinter_delay": 2,
 							"sublimelinter_disable":
@@ -1379,7 +1388,9 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1389,137 +1400,18 @@
 				},
 				{
 					"buffer": 3,
-					"file": "bCoreRiskSite/bCoreRiskSite/settings.py",
-					"settings":
-					{
-						"buffer_size": 3218,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								951,
-								951
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"auto_complete": false,
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"devel": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": "load-save",
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": true,
-							"sublimelinter_gutter_marks_theme": "simple",
-							"sublimelinter_mark_style": "none",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 84.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "bCoreRiskSite/bCoreRiskApp/models.py",
 					"settings":
 					{
-						"buffer_size": 1711,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								268,
-								269
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1621,6 +1513,7 @@
 							},
 							"sublimelinter_wrap_find": true,
 							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1630,19 +1523,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "notes.txt",
+					"buffer": 4,
+					"file": "dev_notes.txt",
 					"settings":
 					{
-						"buffer_size": 680,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								680,
-								680
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1653,7 +1546,6 @@
 								"README",
 								"FIXME"
 							],
-							"auto_name": "Design Notes:",
 							"csslint_options":
 							{
 								"adjoining-classes": "warning",
@@ -1739,6 +1631,130 @@
 							},
 							"sublimelinter_wrap_find": true,
 							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskField.vue",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"auto_complete": false,
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"devel": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"rulers":
+							[
+								80
+							],
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1749,18 +1765,18 @@
 				},
 				{
 					"buffer": 6,
-					"file": "bCoreRiskSite/bCoreRiskApp/admin.py",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskEntry.vue",
 					"settings":
 					{
-						"buffer_size": 163,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								163,
-								163
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1834,6 +1850,10 @@
 							[
 							],
 							"pyflakes_ignore_import_*": true,
+							"rulers":
+							[
+								80
+							],
 							"sublimelinter": "load-save",
 							"sublimelinter_delay": 2,
 							"sublimelinter_disable":
@@ -1856,28 +1876,30 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 764.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/createRFieldDialog.vue",
 					"settings":
 					{
-						"buffer_size": 170,
+						"buffer_size": 2645,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								170,
-								170
+								1152,
+								1152
 							]
 						],
 						"settings":
@@ -1951,6 +1973,10 @@
 							[
 							],
 							"pyflakes_ignore_import_*": true,
+							"rulers":
+							[
+								80
+							],
 							"sublimelinter": "load-save",
 							"sublimelinter_delay": 2,
 							"sublimelinter_disable":
@@ -1973,10 +1999,12 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 176.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
