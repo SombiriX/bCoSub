@@ -9,7 +9,7 @@
         <v-layout row wrap>
           <v-text-field
             :rules=[rules.required]
-            label="Risk Class"
+            label="Risk Type"
             id="risk_class_input"
             v-model="risks[i].risk_class"
           >
@@ -24,7 +24,7 @@
             >
               <v-icon dark>remove_circle_outline</v-icon>
             </v-btn>
-              <span>Delete Risk Class</span>
+              <span>Delete Risk Type</span>
           </v-tooltip>
         </v-layout>
       </v-form>
@@ -43,7 +43,7 @@
           @click.native.stop="dialogOrNull('createRisk')">
           <v-icon dark>add</v-icon>
         </v-btn>
-        <span>New Risk Class</span>
+        <span>New Risk Type</span>
       </v-tooltip>
     </v-layout>
 <!-- User Action Dialogs -->
