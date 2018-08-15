@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="dlgProps.update">
     <v-toolbar flat color="primary">
       <v-toolbar-title>Enum Choices</v-toolbar-title>
       <v-divider
@@ -47,7 +47,7 @@
               >
                 Cancel
               </v-btn>
-              <v-btn 
+              <v-btn
                 type="submit"
                 color="accent"
                 flat
@@ -95,6 +95,11 @@
     >
     </component>
   </div>
+  <div v-else>
+    <v-card-text>
+      Create the field before adding enumerated choices.
+    </v-card-text>
+  </div>
 </template>
 
 <script>
@@ -129,7 +134,7 @@ export default {
     }
   },
   computed: {
-    formTitle: function() {
+    formTitle: function () {
       return this.editedIndex === -1 ? 'New choice' : 'Edit choice'
     }
   },
@@ -228,8 +233,6 @@ export default {
     dialogOrNull: function (dialog) {
       if (dialog === 'yesNo') {
         this.delChoiceDialog = yesNoDialog
-      } else if (dialog === 'createChoice') {
-        this.createChoiceDialog = createChoiceDialog
       } else {
         this.delChoiceDialog = null
         this.createChoiceDialog = null
@@ -241,14 +244,6 @@ export default {
     },
     dialogNo: function () {
       this.delChoiceDialog = null
-    },
-    createChoiceDialogClosed: function () {
-      this.createChoiceDialog = null
-    },
-    dialogCreateChoice: function (userInput) {
-      this.createChoiceDialog = null
-      this.newChoice.choice_text = userInput
-      this.addChoice()
     },
     close: function () {
       this.dialog = false
@@ -263,7 +258,7 @@ export default {
       this.dialog = true
     },
     deleteItem: function (item) {
-      this.currentChoice=item
+      this.currentChoice = item
       this.dialogOrNull('yesNo')
     }
   }
