@@ -175,7 +175,6 @@ export default {
         })
     },
     dialogOrNull: function (dialog) {
-      console.log('currentRisk', this.currentRisk)
       if (dialog === 'yesNo') {
         this.delRiskDialog = yesNoDialog
       } else if (dialog === 'createRisk') {

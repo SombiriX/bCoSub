@@ -37,7 +37,7 @@ class RiskFieldSerializer(serializers.ModelSerializer):
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
-    rField_id = serializers.PrimaryKeyRelatedField(queryset=RiskField.objects.all())
+    risk_field = serializers.PrimaryKeyRelatedField(queryset=RiskField.objects.all())
 
     class Meta:
         model = Choice

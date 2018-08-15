@@ -28,11 +28,17 @@
                 <v-radio label="Date" value="D"></v-radio>
                 <v-radio label="Enum" value="E"></v-radio>
               </v-radio-group>
+              <!-- Only display the choice table for enum types -->
+              <choiceTable
+                v-if="newRField.field_type === 'E'"
+                v-bind:rFieldID="dlgProps.updateField.id"
+              >
+              </choiceTable>
             </v-container>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                color="primary"
+                color="accent"
                 flat="flat"
                 type="submit"
               >
@@ -47,8 +53,13 @@
 </template>
 
 <script>
+import choiceTable from './choiceTable'
+
 export default {
   name: 'createRFieldDialog',
+  components: {
+    'choiceTable': choiceTable
+  },
   props: ['dlgProps'],
   delimiters: ['${', '}'],
   data () {
