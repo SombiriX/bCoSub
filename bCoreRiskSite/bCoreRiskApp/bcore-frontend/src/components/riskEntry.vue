@@ -11,6 +11,7 @@
             :rules=[rules.required]
             label="Risk Type"
             id="risk_class_input"
+            hint="Press enter"
             v-model="risks[i].risk_class"
           >
           </v-text-field>
@@ -63,6 +64,18 @@
       }"
     >
     </component>
+    <component
+      v-bind:is="snackBarDisplay"
+      v-bind:snackProps="{
+        display: true,
+        color: 'success',
+        mode: '',
+        timeout: 1500,
+        text: 'Risk Type Updated'
+      }"
+      @complete=snackBarComplete()
+    >
+    </component>
   </v-container>
 </template>
 
@@ -70,6 +83,7 @@
 import riskField from './riskField'
 import yesNoDialog from './yesNoDialog'
 import createRiskDialog from './createRiskDialog'
+import infoSnackBar from './infoSnackBar'
 import Vue from 'vue'
 
 Vue.component('yesNoDialog', {
@@ -78,6 +92,10 @@ Vue.component('yesNoDialog', {
 
 Vue.component('createRiskDialog', {
   template: createRiskDialog
+})
+
+Vue.component('infoSnackBar', {
+  template: infoSnackBar
 })
 
 export default {
@@ -92,6 +110,8 @@ export default {
       newRiskClass: {'risk_class': ''},
       createRiskDialog: null,
       delRiskDialog: null,
+      snackBarDisplay: null,
+      snackBarTimeout: null,
       rClassValid: false,
       rules: {
         required: value => !!value || 'Required.'
@@ -160,6 +180,7 @@ export default {
       if (this.$refs.rClass[i].validate()) {
         this.currentRisk = this.risks[i]
         this.updateRisk()
+        this.dialogOrNull('snackbar')
       }
     },
     deleteRisk: function (id) {
@@ -179,6 +200,8 @@ export default {
         this.delRiskDialog = yesNoDialog
       } else if (dialog === 'createRisk') {
         this.createRiskDialog = createRiskDialog
+      } else if (dialog === 'snackbar') {
+        this.snackBarDisplay = infoSnackBar
       } else {
         this.delRiskDialog = null
         this.createRiskDialog = null
@@ -198,6 +221,13 @@ export default {
       this.createRiskDialog = null
       this.newRiskClass.risk_class = userInput
       this.addRisk()
+    },
+    removeSnackBar: function () {
+      this.snackBarDisplay = null
+      clearTimeout(this.snackBarTimeout)
+    },
+    snackBarComplete: function () {
+      setTimeout(this.removeSnackBar, 100)
     }
   }
 }

@@ -11,7 +11,7 @@
             <v-container grid-list-xs>
               <v-text-field
                 autofocus
-                label="Risk Class"
+                label="Risk Type"
                 id="risk_class_input"
                 hint="For example: Car, House, Business, pets, etc..."
                 :rules=[rules.required]
