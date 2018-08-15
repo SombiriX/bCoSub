@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"upda",
+				"updateField"
+			],
+			[
 				"obj",
 				"objIsObj〔variable〕"
 			],
@@ -510,10 +514,6 @@
 			[
 				"exa",
 				"examples"
-			],
-			[
-				"uint",
-				"uint8_t"
 			]
 		]
 	},
@@ -523,47 +523,39 @@
 			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
+				"buffer_size": 930,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/public/index.html",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
+				"buffer_size": 867,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/main.js",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
+				"buffer_size": 808,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "bCoreRiskSite/bCoreRiskApp/models.py",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
+				"buffer_size": 1736,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "dev_notes.txt",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskField.vue",
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 2798,
 				"line_ending": "Windows"
 			}
 		},
@@ -571,7 +563,15 @@
 			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskEntry.vue",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 4690,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskField.vue",
+			"settings":
+			{
+				"buffer_size": 5657,
 				"line_ending": "Windows"
 			}
 		},
@@ -579,7 +579,7 @@
 			"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/createRFieldDialog.vue",
 			"settings":
 			{
-				"buffer_size": 2645,
+				"buffer_size": 3544,
 				"line_ending": "Windows"
 			}
 		}
@@ -619,7 +619,7 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 528.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -771,7 +771,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			"Z:\\bCoSub\\bCoreRiskSite\\bCoreRiskApp\\bcore-frontend\\src",
@@ -789,6 +789,21 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"risk_id",
+			"newRField",
+			"dialogCreateRField",
+			"emitCreated",
+			"objHasKeys",
+			"objIsObj",
+			"this.dlgProps.updateField",
+			"updateField",
+			"field_name",
+			"})\n",
+			"createRFieldDialog",
+			"createRFieldDialogClosed",
+			"updateAction",
+			"emitCreated",
+			"btn",
 			"objHasLen",
 			"dlgProps",
 			"r",
@@ -901,22 +916,7 @@
 			"function",
 			"root",
 			"webpack = require('webpack')",
-			"r’article’",
-			"ArticleViewSet",
-			",",
-			"ArticleSerializer",
-			"Article",
-			"ArticleViewSet",
-			"Article",
-			"ArticleSerializer",
-			"editable",
-			"updated_at",
-			"created_at",
-			"Question",
-			"field_text",
-			"TXT",
-			"TASK_TYPE_CHOICES",
-			"_id"
+			"r’article’"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1034,7 +1034,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1042,7 +1042,7 @@
 					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/App.vue",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 930,
 						"regions":
 						{
 						},
@@ -1161,7 +1161,7 @@
 					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/public/index.html",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 867,
 						"regions":
 						{
 						},
@@ -1280,7 +1280,7 @@
 					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/main.js",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 808,
 						"regions":
 						{
 						},
@@ -1403,15 +1403,15 @@
 					"file": "bCoreRiskSite/bCoreRiskApp/models.py",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1736,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								244,
+								244
 							]
 						],
 						"settings":
@@ -1527,15 +1527,15 @@
 					"file": "dev_notes.txt",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 2798,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2798,
+								2798
 							]
 						],
 						"settings":
@@ -1635,17 +1635,17 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 251.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskField.vue",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskEntry.vue",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 4690,
 						"regions":
 						{
 						},
@@ -1765,18 +1765,18 @@
 				},
 				{
 					"buffer": 6,
-					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskEntry.vue",
+					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/riskField.vue",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 5657,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4703,
+								4703
 							]
 						],
 						"settings":
@@ -1881,7 +1881,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 764.0,
+						"translation.y": 1833.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1891,15 +1891,15 @@
 					"file": "bCoreRiskSite/bCoreRiskApp/bcore-frontend/src/components/createRFieldDialog.vue",
 					"settings":
 					{
-						"buffer_size": 2645,
+						"buffer_size": 3544,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1152,
-								1152
+								1728,
+								1737
 							]
 						],
 						"settings":
@@ -1977,6 +1977,7 @@
 							[
 								80
 							],
+							"spell_check": false,
 							"sublimelinter": "load-save",
 							"sublimelinter_delay": 2,
 							"sublimelinter_disable":
@@ -2004,7 +2005,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 176.0,
+						"translation.y": 657.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
