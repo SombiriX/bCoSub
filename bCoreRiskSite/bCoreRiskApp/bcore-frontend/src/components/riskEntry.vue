@@ -1,27 +1,33 @@
 <template>
   <v-container>
-    <v-flex v-for="risk in risks" :key="risk.id">
-      <v-layout row wrap>
-        <v-text-field
-          name="rClass"
-          label="Risk Class"
-          id="risk_class_input"
-          :placeholder=" risk.risk_class "
-        >
-        </v-text-field>
-        <v-tooltip bottom>
-          <v-btn
-            flat
-            icon
-            color="accent"
-            slot="activator"
-            @click.native.stop="dialogOrNull('yesNo'), currentRisk=risk"
+    <v-flex v-for="(risk, i) in risks" :key="risk.id">
+      <v-form
+        ref="rClass"
+        v-model="rClassValid"
+        @submit.prevent="submitRisk(i)"
+      >
+        <v-layout row wrap>
+          <v-text-field
+            :rules=[rules.required]
+            label="Risk Class"
+            id="risk_class_input"
+            v-model="risks[i].risk_class"
           >
-            <v-icon dark>remove_circle_outline</v-icon>
-          </v-btn>
-            <span>Delete Risk Class</span>
-        </v-tooltip>
-      </v-layout>
+          </v-text-field>
+          <v-tooltip bottom>
+            <v-btn
+              flat
+              icon
+              color="accent"
+              slot="activator"
+              @click.native.stop="currentRisk=risks[i], dialogOrNull('yesNo')"
+            >
+              <v-icon dark>remove_circle_outline</v-icon>
+            </v-btn>
+              <span>Delete Risk Class</span>
+          </v-tooltip>
+        </v-layout>
+      </v-form>
       <v-layout row wrap>
         <risk-field v-bind:risk_id="risk.id"></risk-field>
       </v-layout>
@@ -31,6 +37,7 @@
         <v-btn
           fab
           dark
+          ref="rAddButton"
           color="accent"
           slot="activator"
           @click.native.stop="dialogOrNull('createRisk')">
@@ -50,7 +57,7 @@
       v-bind:is="delRiskDialog"
       @dialogYes = "dialogYes()"
       @dialogNo = "dialogNo()"
-      v-bind:msgProps="{
+      v-bind:dlgProps="{
         title: 'Really delete ' + currentRisk.risk_class + '?',
         subtitle: 'This action cannot be undone'
       }"
@@ -84,7 +91,11 @@ export default {
       message: null,
       newRiskClass: {'risk_class': ''},
       createRiskDialog: null,
-      delRiskDialog: null
+      delRiskDialog: null,
+      rClassValid: false,
+      rules: {
+        required: value => !!value || 'Required.'
+      }
     }
   },
   components: {
@@ -133,7 +144,7 @@ export default {
     },
     updateRisk: function () {
       this.loading = true
-      this.$http.put(`/api/risk/${this.currentRisk.risk_id}/`, this.currentRisk)
+      this.$http.put(`/api/risk/${this.currentRisk.id}/`, this.currentRisk)
         .then((response) => {
           this.loading = false
           this.currentRisk = response.data
@@ -143,6 +154,13 @@ export default {
           this.loading = false
           console.log(err)
         })
+    },
+    submitRisk: function (i) {
+      // Capture form submission
+      if (this.$refs.rClass[i].validate()) {
+        this.currentRisk = this.risks[i]
+        this.updateRisk()
+      }
     },
     deleteRisk: function (id) {
       this.loading = true
@@ -157,6 +175,7 @@ export default {
         })
     },
     dialogOrNull: function (dialog) {
+      console.log('currentRisk', this.currentRisk)
       if (dialog === 'yesNo') {
         this.delRiskDialog = yesNoDialog
       } else if (dialog === 'createRisk') {
