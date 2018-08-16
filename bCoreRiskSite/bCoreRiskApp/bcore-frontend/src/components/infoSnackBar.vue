@@ -26,11 +26,11 @@ export default {
       timeout: this.snackProps.timeout,
       text: this.snackProps.text
     }
-  },  
+  },
   watch: {
     snackbar (val) {
       this.$emit('complete')
     }
-  },
+  }
 }
 </script>

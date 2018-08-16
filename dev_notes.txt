@@ -13,6 +13,9 @@ REFs: https://lukeplant.me.uk/blog/posts/avoid-django-genericforeignkey/
 - Configure webpack-loader per https://medium.com/@jrmybrcf/how-to-build-api-rest-project-with-django-vuejs-part-i-228cbed4ce0c
 Need to run './manage.py collectstatic' to pull vue files into django
 
+- Generate ERM using graph_models
+    - ./manage.py graph_models -a -g -o ../entity_relation_diagram.png
+
 Issues resolved:
 - Webpack config js file does not exists
     - [RESOLUTION] VUE CLI 3 handles webpack configuration internally additional configs need to be added to vue.config.js inside the following:
