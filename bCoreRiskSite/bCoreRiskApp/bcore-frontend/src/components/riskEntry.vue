@@ -1,81 +1,96 @@
 <template>
-  <v-container>
-    <v-flex v-for="(risk, i) in risks" :key="risk.id">
-      <v-form
-        ref="rClass"
-        v-model="rClassValid"
-        @submit.prevent="submitRisk(i)"
-      >
-        <v-layout row wrap>
-          <v-text-field
-            :rules=[rules.required]
-            label="Risk Type"
-            id="risk_class_input"
-            hint="Press enter"
-            v-model="risks[i].risk_class"
-          >
-          </v-text-field>
-          <v-tooltip bottom>
-            <v-btn
-              flat
-              icon
-              color="accent"
-              slot="activator"
-              @click.native.stop="currentRisk=risks[i], dialogOrNull('yesNo')"
+  <v-container grid-list-xs>
+    <v-layout row wrap>
+      <v-flex>      
+        <v-card color="gray">    
+          <v-flex v-for="(risk, i) in risks" :key="risk.id">
+            <v-form
+              ref="rClass"
+              v-model="rClassValid"
+              @submit.prevent="submitRisk(i)"
             >
-              <v-icon dark>remove_circle_outline</v-icon>
-            </v-btn>
-              <span>Delete Risk Type</span>
-          </v-tooltip>
-        </v-layout>
-      </v-form>
-      <v-layout row wrap>
-        <risk-field v-bind:risk_id="risk.id"></risk-field>
-      </v-layout>
-    </v-flex>
-    <v-layout row justify-end>
-      <v-tooltip bottom>
-        <v-btn
-          fab
-          dark
-          ref="rAddButton"
-          color="accent"
-          slot="activator"
-          @click.native.stop="dialogOrNull('createRisk')">
-          <v-icon dark>add</v-icon>
-        </v-btn>
-        <span>New Risk Type</span>
-      </v-tooltip>
+              <v-layout row wrap justify-center>
+                <v-flex xs10>
+                  
+                  <v-text-field
+                    :rules=[rules.required]
+                    label="Risk Type"
+                    id="risk_class_input"
+                    hint="Press enter"
+                    v-model="risks[i].risk_class"
+                  >
+                  </v-text-field>
+                </v-flex>
+                <v-flex xs1>                  
+                  <v-tooltip bottom>
+                    <v-btn
+                      flat
+                      icon
+                      color="accent"
+                      slot="activator"
+                      @click.native.stop="
+                        currentRisk=risks[i],
+                        dialogOrNull('yesNo')"
+                    >
+                      <v-icon dark>remove_circle_outline</v-icon>
+                    </v-btn>
+                      <span>Delete Risk Type</span>
+                  </v-tooltip>
+                </v-flex>
+              </v-layout>
+            </v-form>
+            <v-layout row wrap justify-center>
+              <v-flex xs10>                
+                <risk-field v-bind:risk_id="risk.id"></risk-field>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-layout row justify-end>
+            <v-tooltip bottom>
+              <v-btn
+                fab
+                dark
+                ref="rAddButton"
+                color="accent"
+                slot="activator"
+                @click.native.stop="dialogOrNull('createRisk')">
+                <v-icon dark>add</v-icon>
+              </v-btn>
+              <span>New Risk Type</span>
+            </v-tooltip>
+          </v-layout>
+      <!-- User Action Dialogs -->
+          <component
+            v-bind:is="createRiskDialog"
+            @riskCreated = "dialogCreateRisk"
+            @createRiskDialogClosed = "createRiskDialogClosed()"
+          >
+          </component>
+          <component
+            v-bind:is="delRiskDialog"
+            @dialogYes = "dialogYes()"
+            @dialogNo = "dialogNo()"
+            v-bind:dlgProps="{
+              title: 'Really delete ' + currentRisk.risk_class + '?',
+              subtitle: 'This action cannot be undone'
+            }"
+          >
+          </component>
+          <component
+            v-bind:is="snackBarDisplay"
+            v-bind:snackProps="{
+              display: true,
+              color: 'success',
+              mode: '',
+              timeout: 1500,
+              text: 'Risk Type Updated'
+            }"
+            @complete=snackBarComplete()
+          >
+          </component>
+        </v-card>
+      </v-flex>
     </v-layout>
-<!-- User Action Dialogs -->
-    <component
-      v-bind:is="createRiskDialog"
-      @riskCreated = "dialogCreateRisk"
-      @createRiskDialogClosed = "createRiskDialogClosed()"
-    >
-    </component>
-    <component
-      v-bind:is="delRiskDialog"
-      @dialogYes = "dialogYes()"
-      @dialogNo = "dialogNo()"
-      v-bind:dlgProps="{
-        title: 'Really delete ' + currentRisk.risk_class + '?',
-        subtitle: 'This action cannot be undone'
-      }"
-    >
-    </component>
-    <component
-      v-bind:is="snackBarDisplay"
-      v-bind:snackProps="{
-        display: true,
-        color: 'success',
-        mode: '',
-        timeout: 1500,
-        text: 'Risk Type Updated'
-      }"
-      @complete=snackBarComplete()
-    >
-    </component>
   </v-container>
 </template>
 
