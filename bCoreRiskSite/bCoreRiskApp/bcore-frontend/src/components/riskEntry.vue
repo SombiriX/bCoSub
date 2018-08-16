@@ -1,8 +1,8 @@
 <template>
   <v-container grid-list-xs>
     <v-layout row wrap>
-      <v-flex>      
-        <v-card color="gray">    
+      <v-flex>
+        <v-card color="gray">
           <v-flex v-for="(risk, i) in risks" :key="risk.id">
             <v-form
               ref="rClass"
@@ -11,7 +11,6 @@
             >
               <v-layout row wrap justify-center>
                 <v-flex xs10>
-                  
                   <v-text-field
                     :rules=[rules.required]
                     label="Risk Type"
@@ -21,7 +20,7 @@
                   >
                   </v-text-field>
                 </v-flex>
-                <v-flex xs1>                  
+                <v-flex xs1>
                   <v-tooltip bottom>
                     <v-btn
                       flat
@@ -40,7 +39,7 @@
               </v-layout>
             </v-form>
             <v-layout row wrap justify-center>
-              <v-flex xs10>                
+              <v-flex xs10>
                 <risk-field v-bind:risk_id="risk.id"></risk-field>
               </v-flex>
             </v-layout>
