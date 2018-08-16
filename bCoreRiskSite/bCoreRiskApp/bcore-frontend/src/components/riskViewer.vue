@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-toolbar color="cyan" dark round>
+    <v-toolbar color="primary lighten-1" dark>
       <v-toolbar-title>Risk Types</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
@@ -25,41 +25,45 @@
         v-model="rFormValid"
         @submit.prevent="submit()"
       >
-        <v-dialog v-model="rEntryDialog" max-width="400">
-          <v-toolbar color="cyan" dark>
-            <v-toolbar-title>{{ currentRisk.risk_class }}</v-toolbar-title>
-            <v-spacer></v-spacer>
-          </v-toolbar>
-          <v-layout row wrap justify-center>
-            <v-flex xs10>
-              <v-card
-                color="indigo"
-                v-for="(rf, i) in riskFields"
-                :key="i"
-              >
-                <risk-field-view v-bind:riskField="rf"></risk-field-view>
-                <v-divider></v-divider>
-              </v-card>
-            </v-flex>
-          </v-layout>
-          <v-card>
-            <v-card-actions>
+        <v-dialog v-model="rEntryDialog" max-width="400" flat>
+          <v-card
+            color="secondary"
+          >
+            <v-toolbar color="primary lighten-1" dark>
+              <v-toolbar-title>{{ currentRisk.risk_class }}</v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                flat="flat"
-                @click.native="close()"
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                type="submit"
-                color="primary"
-                flat="flat"
-              >
-                Save
-              </v-btn>
-            </v-card-actions>
+            </v-toolbar>
+            <v-layout row wrap justify-center>
+              <v-flex xs10>
+                <v-card
+                  color="secondary lighten-1"
+                  v-for="(rf, i) in riskFields"
+                  :key="i"
+                >
+                  <risk-field-view v-bind:riskField="rf"></risk-field-view>
+                  <v-divider></v-divider>
+                </v-card>
+              </v-flex>
+            </v-layout>
+            <v-card>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="accent"
+                  flat="flat"
+                  @click.native="close()"
+                >
+                  Cancel
+                </v-btn>
+                <v-btn
+                  type="submit"
+                  color="accent"
+                  flat="flat"
+                >
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
           </v-card>
         </v-dialog>
       </v-form>

@@ -2,19 +2,23 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs10>
-        <v-text-field
+        <v-textarea
           v-if="fieldType === 'T'"
           :label="riskField.field_name"
           :rules=[rules.required]
           hint="Text"
+          box
+          auto-grow
+          counter=1000
         >
-        </v-text-field>
+        </v-textarea>
         <v-text-field
           v-else-if="fieldType === 'N'"
           :label="riskField.field_name"
           mask="################"
-          :rules=[rules.required]
+          :rules="[rules.required, rules.textareaLen]"
           hint="Number"
+          counter=16
         >
         </v-text-field>
         <v-menu
@@ -64,7 +68,8 @@ export default {
     return {
       choicesArr: [],
       rules: {
-        required: value => !!value || 'Required.'
+        required: v => !!v || 'Field required',
+        textareaLen: v => v.length <= 1000 || 'Maximum Length'
       },
       date: null,
       dateMenu: false,
