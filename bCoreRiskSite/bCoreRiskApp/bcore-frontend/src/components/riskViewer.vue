@@ -51,7 +51,7 @@
                           box
                           auto-grow
                           counter=1000
-                          v-model="curRiskFields[i].field[0]"
+                          v-model="curRiskFields[i].field"
                         >
                         </v-textarea>
                         <v-text-field
@@ -61,7 +61,7 @@
                           hint="Number"
                           type='number'
                           counter=10
-                          v-model="curRiskFields[i].field[0]"
+                          v-model="curRiskFields[i].field"
                         >
                         </v-text-field>
                         <v-menu
@@ -70,7 +70,7 @@
                           :close-on-content-click="false"
                           v-model="dateMenu"
                           :nudge-right="40"
-                          :return-value.sync="curRiskFields[i].field[0]"
+                          :return-value.sync="curRiskFields[i].field"
                           lazy
                           transition="scale-transition"
                           offset-y
@@ -79,7 +79,7 @@
                         >
                           <v-text-field
                             slot="activator"
-                            v-model="curRiskFields[i].field[0]"
+                            v-model="curRiskFields[i].field"
                             :label="curRiskFields[i].field_name"
                             prepend-icon="event"
                             readonly
@@ -87,7 +87,7 @@
                           >
                           </v-text-field>
                           <v-date-picker
-                            v-model="curRiskFields[i].field[0]"
+                            v-model="curRiskFields[i].field"
                             @input="saveDate(i)"
                           >
                           </v-date-picker>
@@ -100,7 +100,7 @@
                           item-value="id"
                           :label="curRiskFields[i].field_name"
                           hint="Make a choice"
-                          v-model="curRiskFields[i].field[0]"
+                          v-model="curRiskFields[i].field"
                           :rules="[rules.selectOne]"
                         >
                         </v-select>
@@ -154,7 +154,7 @@ export default {
     return {
       risks: [],
       riskFields: [],
-      // curRiskFields: [],
+      curRiskFields: [],
       choices: [],
       loading: false,
       currentRisk: {},
@@ -174,9 +174,6 @@ export default {
     this.getChoices()
   },
   computed: {
-    curRiskFields: function () {
-      return this.riskRiskFields(this.currentRisk)
-    }
   },
   methods: {
     getRisks: function () {
@@ -222,6 +219,9 @@ export default {
         }
       })
     },
+    getCurRiskFields: function () {
+      return this.riskRiskFields(this.currentRisk)
+    },
     getChoices: function () {
       this.loading = true
       // var rFieldID = this.riskField.id
@@ -251,6 +251,7 @@ export default {
     displayRisk: function (risk) {
       // Load all risk data and display the dialog
       this.currentRisk = risk
+      this.curRiskFields = this.getCurRiskFields()
       this.rEntryDialog = true
     },
     close: function () {
@@ -290,7 +291,7 @@ export default {
       return (fieldType === 'E') && !(this.enumCheck)
     },
     saveDate: function (i) {
-      this.$refs.dateMenu[i].save(this.curRiskFields[i].field[0])
+      this.$refs.dateMenu[i].save(this.curRiskFields[i].field)
     }
   }
 }

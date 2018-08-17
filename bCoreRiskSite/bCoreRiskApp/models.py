@@ -21,8 +21,8 @@ class RiskField(models.Model):
     field_name = models.CharField(max_length=200)
     field_text = models.TextField(null=True, blank=True, max_length=1000)
     field_num = models.FloatField(null=True, blank=True)
-    field_date = models.DateTimeField(null=True, blank=True)
-    field_enum_text = models.CharField(max_length=200, null=True, blank=True)
+    field_date = models.DateField(null=True, blank=True)
+    field_enum = models.IntegerField(null=True, blank=True)
     field_type = models.CharField(
         max_length=1,
         choices=FIELD_TYPE_CHOICES,

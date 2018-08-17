@@ -29,11 +29,11 @@ class riskFieldFieldSerializer(serializers.Field):
         if obj.field_type == TXT:
             return obj.field_text
         if obj.field_type == NUM:
-            return obj.field_num,
+            return obj.field_num
         if obj.field_type == DAT:
-            return obj.field_date,
+            return obj.field_date
         if obj.field_type == ENM:
-            return obj.field_enum_text
+            return obj.field_enum
         raise AssertionError("Field type is not defined")
 
     def to_internal_value(self, data):
@@ -77,12 +77,26 @@ class RiskFieldSerializer(serializers.ModelSerializer):
         elif rField.field_type == DAT:
             rField.field_date = field_input
         elif rField.field_type == ENM:
-            rField.field_enum_text = field_input
+            rField.field_enum = field_input
         else:
             raise AssertionError("Invalid Field type", rField.field_type)
         rField.save()
 
         return rField
+
+    def validate(self, data):
+        field_input = data.get('field', None)
+        if data['field_type'] == TXT:
+            data.field_text = field_input
+        elif data['field_type'] == NUM:
+            data.field_num = field_input
+        elif data['field_type'] == DAT:
+            data.field_date = field_input
+        elif data['field_type'] == ENM:
+            data.field_enum = field_input
+        else:
+            raise AssertionError("Invalid Field type", data.field_type)
+        return data
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
