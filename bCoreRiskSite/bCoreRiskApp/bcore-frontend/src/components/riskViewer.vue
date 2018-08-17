@@ -40,12 +40,81 @@
                   v-for="(rf, i) in curRiskFields"
                   :key="i"
                 >
-                  <risk-field-view
-                    v-bind:riskField="Object.assign({}, curRiskFields[i])"
-                    v-bind:choices="choices"
-                    v-model="curRiskFields[i].field"
-                  >
-                  </risk-field-view>
+                  <v-container>
+                    <v-layout row wrap justify-center>
+                      <v-flex xs10>
+                        <v-textarea
+                          v-if="curRiskFields[i].field_type === 'T'"
+                          :label="curRiskFields[i].field_name"
+                          :rules="[rules.required, rules.textareaLen]"
+                          hint="Text"
+                          box
+                          auto-grow
+                          counter=1000
+                          v-model="curRiskFields[i].field[0]"
+                        >
+                        </v-textarea>
+                        <v-text-field
+                          v-if="curRiskFields[i].field_type === 'N'"
+                          :label="curRiskFields[i].field_name"
+                          :rules="[rules.required]"
+                          hint="Number"
+                          type='number'
+                          counter=10
+                          v-model="curRiskFields[i].field[0]"
+                        >
+                        </v-text-field>
+                        <v-menu
+                          v-if="curRiskFields[i].field_type === 'D'"
+                          ref="dateMenu"
+                          :close-on-content-click="false"
+                          v-model="dateMenu"
+                          :nudge-right="40"
+                          :return-value.sync="curRiskFields[i].field[0]"
+                          lazy
+                          transition="scale-transition"
+                          offset-y
+                          full-width
+                          min-width="290px"
+                        >
+                          <v-text-field
+                            slot="activator"
+                            v-model="curRiskFields[i].field[0]"
+                            :label="curRiskFields[i].field_name"
+                            prepend-icon="event"
+                            readonly
+                            :rules="[rules.selectOne]"
+                          >
+                          </v-text-field>
+                          <v-date-picker
+                            v-model="curRiskFields[i].field[0]"
+                            @input="saveDate(i)"
+                          >
+                          </v-date-picker>
+
+                        </v-menu>
+                        <v-select
+                          v-if="enumCheck(curRiskFields[i].field_type)"
+                          :items="fieldChoices(curRiskFields[i].id)"
+                          item-text="choice_text"
+                          item-value="id"
+                          :label="curRiskFields[i].field_name"
+                          hint="Make a choice"
+                          v-model="curRiskFields[i].field[0]"
+                          :rules="[rules.selectOne]"
+                        >
+                        </v-select>
+                        <v-card
+                          v-if="errorCheck(curRiskFields[i].field_type)"
+                          color="error"
+                        >
+                          <v-card-title primary-title>
+                            This field is not properly configured
+                          </v-card-title>
+                        </v-card>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
                   <v-divider></v-divider>
                 </v-card>
               </v-flex>
@@ -77,7 +146,6 @@
 </template>
 
 <script>
-import riskFieldView from './riskFieldView'
 
 export default {
   name: 'riskViewer',
@@ -86,21 +154,29 @@ export default {
     return {
       risks: [],
       riskFields: [],
-      curRiskFields: [],
+      // curRiskFields: [],
       choices: [],
       loading: false,
       currentRisk: {},
+      dateMenu: false,
       rEntryDialog: false,
-      rFormValid: false
+      rFormValid: false,
+      rules: {
+        required: v => !!v || 'Field required',
+        textareaLen: v => (v && (v.length <= 1000)) || 'Maximum Length',
+        selectOne: v => !(v === '') || 'A selection is required'
+      }
     }
-  },
-  components: {
-    'risk-field-view': riskFieldView
   },
   created: function () {
     this.getRisks()
     this.getRFields()
     this.getChoices()
+  },
+  computed: {
+    curRiskFields: function () {
+      return this.riskRiskFields(this.currentRisk)
+    }
   },
   methods: {
     getRisks: function () {
@@ -152,12 +228,6 @@ export default {
       this.$http.get('/api/choice/')
         .then((response) => {
           this.choices = response.data
-          // .filter(function (choice) {
-          //   // Set style based on data type
-          //   if (choice.risk_field === rFieldID) {
-          //     return choice
-          //   }
-          // })
         })
         .catch((err) => {
           this.loading = false
@@ -181,7 +251,6 @@ export default {
     displayRisk: function (risk) {
       // Load all risk data and display the dialog
       this.currentRisk = risk
-      this.curRiskFields = this.riskRiskFields(risk)
       this.rEntryDialog = true
     },
     close: function () {
@@ -197,6 +266,31 @@ export default {
           this.updateRField(this.curRiskFields[key])
         }
       }
+    },
+    fieldChoices: function (rFieldID) {
+      // Filter choices by ID then return a reformatted
+      // choice array
+      // let rFieldID = this.riskField.id
+      return this.choices.filter(function (choice) {
+        if (choice.risk_field === rFieldID) {
+          return choice
+        }
+      })
+        .map(function (choice) {
+          return {
+            id: choice.id,
+            choice_text: choice.choice_text
+          }
+        })
+    },
+    enumCheck: function (fieldType) {
+      return (fieldType === 'E') && (this.fieldChoices.length > 0)
+    },
+    errorCheck: function (fieldType) {
+      return (fieldType === 'E') && !(this.enumCheck)
+    },
+    saveDate: function (i) {
+      this.$refs.dateMenu[i].save(this.curRiskFields[i].field[0])
     }
   }
 }
