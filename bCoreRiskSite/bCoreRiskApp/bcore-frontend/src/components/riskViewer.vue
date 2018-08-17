@@ -164,7 +164,7 @@ export default {
       rules: {
         required: v => !!v || 'Field required',
         textareaLen: v => (v && (v.length <= 1000)) || 'Maximum Length',
-        selectOne: v => !(v === '') || 'A selection is required'
+        selectOne: v => (!(v === '') && (v != null)) || 'A selection is required'
       }
     }
   },
