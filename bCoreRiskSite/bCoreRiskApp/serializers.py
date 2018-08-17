@@ -23,6 +23,7 @@ class riskFieldFieldSerializer(serializers.Field):
     def __init__(self, **kwargs):
         kwargs['source'] = '*'
         kwargs['read_only'] = False
+        kwargs['required'] = False
         super(riskFieldFieldSerializer, self).__init__(**kwargs)
 
     def to_representation(self, obj):
