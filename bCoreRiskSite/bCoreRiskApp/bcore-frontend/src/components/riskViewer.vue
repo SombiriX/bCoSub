@@ -37,12 +37,13 @@
               <v-flex xs10>
                 <v-card
                   color="secondary lighten-1"
-                  v-for="(rf, i) in riskFields"
+                  v-for="(rf, i) in curRiskFields"
                   :key="i"
                 >
                   <risk-field-view
-                    v-bind:riskField="rf"
-                    v-model="rf.field"
+                    v-bind:riskField="Object.assign({}, curRiskFields[i])"
+                    v-bind:choices="choices"
+                    v-model="curRiskFields[i].field"
                   >
                   </risk-field-view>
                   <v-divider></v-divider>
@@ -85,23 +86,21 @@ export default {
     return {
       risks: [],
       riskFields: [],
+      curRiskFields: [],
       choices: [],
       loading: false,
       currentRisk: {},
       rEntryDialog: false,
-      snackBarDisplay: null,
-      snackBarTimeout: null,
-      rFormValid: false,
-      rules: {
-        required: value => !!value || 'Required.'
-      }
+      rFormValid: false
     }
   },
   components: {
     'risk-field-view': riskFieldView
   },
-  mounted: function () {
+  created: function () {
     this.getRisks()
+    this.getRFields()
+    this.getChoices()
   },
   methods: {
     getRisks: function () {
@@ -130,16 +129,9 @@ export default {
     },
     getRFields: function () {
       this.loading = true
-      var riskID = this.currentRisk.id
       this.$http.get('/api/riskfield/')
         .then((response) => {
-          this.riskFields = response.data.filter(function (rf) {
-            // Set style based on data type
-            if (rf.risk.id === riskID) {
-              // rf.data = ''
-              return rf
-            }
-          })
+          this.riskFields = response.data
         })
         .catch((err) => {
           this.loading = false
@@ -147,12 +139,38 @@ export default {
         })
       this.loading = false
     },
-    updateRField: function (rfield) {
+    riskRiskFields: function (risk) {
+      return this.riskFields.filter(function (rf) {
+        if (rf.risk.id === risk.id) {
+          return rf
+        }
+      })
+    },
+    getChoices: function () {
       this.loading = true
-      this.$http.put(`/api/riskfield/${rfield.id}/`, rfield)
+      // var rFieldID = this.riskField.id
+      this.$http.get('/api/choice/')
+        .then((response) => {
+          this.choices = response.data
+          // .filter(function (choice) {
+          //   // Set style based on data type
+          //   if (choice.risk_field === rFieldID) {
+          //     return choice
+          //   }
+          // })
+        })
+        .catch((err) => {
+          this.loading = false
+          console.log(err)
+        })
+      this.loading = false
+    },
+    updateRField: function (rField) {
+      this.loading = true
+      this.$http.put(`/api/riskfield/${rField.id}/`, rField)
         .then((response) => {
           this.loading = false
-          // this.rfield = response.data
+          // this.rField = response.data
           this.getRFields()
         })
         .catch((err) => {
@@ -160,20 +178,14 @@ export default {
           console.log(err)
         })
     },
-    clear: function () {
-      // Clears all form inputs
-      this.$refs.riskForm.reset()
-    },
     displayRisk: function (risk) {
       // Load all risk data and display the dialog
       this.currentRisk = risk
-      this.getRFields()
+      this.curRiskFields = this.riskRiskFields(risk)
       this.rEntryDialog = true
     },
     close: function () {
       // Clear form and close the dialog
-      console.log(this.riskFields)
-      this.clear()
       this.rEntryDialog = false
     },
     submit: function () {
@@ -181,8 +193,8 @@ export default {
       if (this.$refs.riskForm.validate()) {
         this.rEntryDialog = false
         // Get and submit data
-        for (var key in this.riskFields) {
-          this.updateRField(this.riskFields[key])
+        for (var key in this.curRiskFields) {
+          this.updateRField(this.curRiskFields[key])
         }
       }
     }

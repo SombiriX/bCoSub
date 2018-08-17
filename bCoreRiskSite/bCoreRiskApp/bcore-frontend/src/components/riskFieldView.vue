@@ -15,7 +15,7 @@
         >
         </v-textarea>
         <v-text-field
-          v-else-if="fieldType === 'N'"
+          v-if="fieldType === 'N'"
           :label="riskField.field_name"
           :rules="[rules.required]"
           hint="Number"
@@ -26,7 +26,7 @@
         >
         </v-text-field>
         <v-menu
-          v-else-if="fieldType === 'D'"
+          v-if="fieldType === 'D'"
           ref="dateMenu"
           :close-on-content-click="false"
           v-model="dateMenu"
@@ -57,8 +57,8 @@
 
         </v-menu>
         <v-select
-          v-else-if="enumCheck"
-          :items="choices"
+          v-if="enumCheck"
+          :items="fieldChoices"
           item-text="choice_text"
           item-value="id"
           :label="riskField.field_name"
@@ -69,7 +69,7 @@
         >
         </v-select>
         <v-card
-          v-else
+          v-if="errorCheck"
           color="error"
         >
           <v-card-title primary-title>
@@ -84,47 +84,26 @@
 <script>
 export default {
   name: 'riskFieldView',
-  props: ['riskField', 'value'],
+  props: ['riskField', 'choices', 'value'],
   data () {
     return {
-      choicesArr: [],
       rules: {
         required: v => !!v || 'Field required',
         textareaLen: v => (v && (v.length <= 1000)) || 'Maximum Length',
         selectOne: v => !(v === '') || 'A selection is required'
       },
       dateMenu: false,
-      loading: false,
       input: {
-        txt: '',
-        num: '',
-        dat: '',
-        enm: ''
+        txt: this.value,
+        num: this.value,
+        dat: this.value,
+        enm: this.value
       }
     }
   },
-  mounted: function () {
-    this.getChoices()
+  created: function () {
   },
   methods: {
-    getChoices: function () {
-      this.loading = true
-      var rFieldID = this.riskField.id
-      this.$http.get('/api/choice/')
-        .then((response) => {
-          this.choicesArr = response.data.filter(function (choice) {
-            // Set style based on data type
-            if (choice.risk_field === rFieldID) {
-              return choice
-            }
-          })
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
-      this.loading = false
-    },
     emitInput: function (fType) {
       switch (fType) {
         case 'txt':
@@ -148,18 +127,27 @@ export default {
     fieldType: function () {
       return this.riskField.field_type
     },
-    choices: function () {
-      var choiceList = []
-      for (var choice in this.choicesArr) {
-        choiceList.push({
-          id: this.choicesArr[choice].id,
-          choice_text: this.choicesArr[choice].choice_text
+    fieldChoices: function () {
+      // Filter choices by ID then return a reformatted
+      // choice array
+      var rFieldID = this.riskField.id
+      return this.choices.filter(function (choice) {
+        if (choice.risk_field === rFieldID) {
+          return choice
+        }
+      })
+        .map(function (choice) {
+          return {
+            id: choice.id,
+            choice_text: choice.choice_text
+          }
         })
-      }
-      return choiceList
     },
     enumCheck: function () {
-      return (this.fieldType === 'E') && (this.choices.length > 0)
+      return (this.fieldType === 'E') && (this.fieldChoices.length > 0)
+    },
+    errorCheck: function () {
+      return (this.fieldType === 'E') && !(this.enumCheck)
     }
   }
 }
