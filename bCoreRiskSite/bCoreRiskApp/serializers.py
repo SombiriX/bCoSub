@@ -1,6 +1,11 @@
 from rest_framework import serializers
 from .models import Risk, RiskField, Choice
 
+TXT = 'T'
+NUM = 'N'
+DAT = 'D'
+ENM = 'E'
+
 
 class RiskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,8 +14,37 @@ class RiskSerializer(serializers.ModelSerializer):
         depth = 1
 
 
+class riskFieldFieldSerializer(serializers.Field):
+    """
+    Custom field to make a dyanmic read / write field for the
+    riskField Model
+    """
+
+    def __init__(self, **kwargs):
+        kwargs['source'] = '*'
+        kwargs['read_only'] = False
+        super(riskFieldFieldSerializer, self).__init__(**kwargs)
+
+    def to_representation(self, obj):
+        if obj.field_type == TXT:
+            return obj.field_text
+        if obj.field_type == NUM:
+            return obj.field_num,
+        if obj.field_type == DAT:
+            return obj.field_date,
+        if obj.field_type == ENM:
+            return obj.field_enum_text
+        raise AssertionError("Field type is not defined")
+
+    def to_internal_value(self, data):
+        return {
+            'field': data
+            }
+
+
 class RiskFieldSerializer(serializers.ModelSerializer):
     risk_id = serializers.PrimaryKeyRelatedField(queryset=Risk.objects.all())
+    field = riskFieldFieldSerializer()
 
     class Meta:
         model = RiskField
@@ -32,7 +66,22 @@ class RiskFieldSerializer(serializers.ModelSerializer):
         rField.field_name = validated_data.get('field_name', rField.field_name)
         rField.field_type = validated_data.get('field_type', rField.field_type)
         rField.risk = validated_data.get('risk_id', rField.risk)
+
+        # Use the dynamic field "field" to update this risksField's
+        # underlying data
+        field_input = validated_data.get('field', None)
+        if rField.field_type == TXT:
+            rField.field_text = field_input
+        elif rField.field_type == NUM:
+            rField.field_num = field_input
+        elif rField.field_type == DAT:
+            rField.field_date = field_input
+        elif rField.field_type == ENM:
+            rField.field_enum_text = field_input
+        else:
+            raise AssertionError("Invalid Field type", rField.field_type)
         rField.save()
+
         return rField
 
 

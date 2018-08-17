@@ -5,20 +5,24 @@
         <v-textarea
           v-if="fieldType === 'T'"
           :label="riskField.field_name"
-          :rules=[rules.required]
+          :rules="[rules.required, rules.textareaLen]"
           hint="Text"
           box
           auto-grow
           counter=1000
+          v-model="input.txt"
+          @input="emitInput('txt')"
         >
         </v-textarea>
         <v-text-field
           v-else-if="fieldType === 'N'"
           :label="riskField.field_name"
-          mask="################"
-          :rules="[rules.required, rules.textareaLen]"
+          :rules="[rules.required]"
           hint="Number"
-          counter=16
+          type='number'
+          counter=10
+          v-model="input.num"
+          @input="emitInput('num')"
         >
         </v-text-field>
         <v-menu
@@ -27,7 +31,7 @@
           :close-on-content-click="false"
           v-model="dateMenu"
           :nudge-right="40"
-          :return-value.sync="date"
+          :return-value.sync="input.dat"
           lazy
           transition="scale-transition"
           offset-y
@@ -36,25 +40,42 @@
         >
           <v-text-field
             slot="activator"
-            v-model="date"
+            v-model="input.dat"
             :label="riskField.field_name"
             prepend-icon="event"
             readonly
-          ></v-text-field>
+            :rules="[rules.selectOne]"
+          >
+          </v-text-field>
           <v-date-picker
-            v-model="date"
-            @input="$refs.dateMenu.save(date)"
-          ></v-date-picker>
+            v-model="input.dat"
+            @input="
+              $refs.dateMenu.save(input.dat),
+              emitInput('dat')"
+          >
+          </v-date-picker>
 
         </v-menu>
         <v-select
-          v-else-if="fieldType === 'E'"
+          v-else-if="enumCheck"
           :items="choices"
           item-text="choice_text"
           item-value="id"
           :label="riskField.field_name"
           hint="Make a choice"
-        ></v-select>
+          v-model="input.enm"
+          @input="emitInput('enm')"
+          :rules="[rules.selectOne]"
+        >
+        </v-select>
+        <v-card
+          v-else
+          color="error"
+        >
+          <v-card-title primary-title>
+            This field is not properly configured
+          </v-card-title>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -63,17 +84,23 @@
 <script>
 export default {
   name: 'riskFieldView',
-  props: ['riskField'],
+  props: ['riskField', 'value'],
   data () {
     return {
       choicesArr: [],
       rules: {
         required: v => !!v || 'Field required',
-        textareaLen: v => v.length <= 1000 || 'Maximum Length'
+        textareaLen: v => (v && (v.length <= 1000)) || 'Maximum Length',
+        selectOne: v => !(v === '') || 'A selection is required'
       },
-      date: null,
       dateMenu: false,
-      loading: false
+      loading: false,
+      input: {
+        txt: '',
+        num: '',
+        dat: '',
+        enm: ''
+      }
     }
   },
   mounted: function () {
@@ -97,6 +124,24 @@ export default {
           console.log(err)
         })
       this.loading = false
+    },
+    emitInput: function (fType) {
+      switch (fType) {
+        case 'txt':
+          this.$emit('input', this.input.txt)
+          break
+        case 'num':
+          this.$emit('input', this.input.num)
+          break
+        case 'dat':
+          this.$emit('input', this.input.dat)
+          break
+        case 'enm':
+          this.$emit('input', this.input.enm)
+          break
+        default:
+          console.log('Error in form entry')
+      }
     }
   },
   computed: {
@@ -112,6 +157,9 @@ export default {
         })
       }
       return choiceList
+    },
+    enumCheck: function () {
+      return (this.fieldType === 'E') && (this.choices.length > 0)
     }
   }
 }

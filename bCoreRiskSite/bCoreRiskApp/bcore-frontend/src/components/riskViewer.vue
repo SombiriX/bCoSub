@@ -20,12 +20,12 @@
       </template>
     </v-list>
     <v-layout row justify-center>
-      <v-form
-        ref="riskForm"
-        v-model="rFormValid"
-        @submit.prevent="submit()"
-      >
-        <v-dialog v-model="rEntryDialog" max-width="400" flat>
+      <v-dialog v-model="rEntryDialog" max-width="400" flat>
+        <v-form
+          ref="riskForm"
+          v-model="rFormValid"
+          @submit.prevent="submit()"
+        >
           <v-card
             color="secondary"
           >
@@ -40,7 +40,11 @@
                   v-for="(rf, i) in riskFields"
                   :key="i"
                 >
-                  <risk-field-view v-bind:riskField="rf"></risk-field-view>
+                  <risk-field-view
+                    v-bind:riskField="rf"
+                    v-model="rf.field"
+                  >
+                  </risk-field-view>
                   <v-divider></v-divider>
                 </v-card>
               </v-flex>
@@ -65,8 +69,8 @@
               </v-card-actions>
             </v-card>
           </v-card>
-        </v-dialog>
-      </v-form>
+        </v-form>
+      </v-dialog>
     </v-layout>
   </v-container>
 </template>
@@ -132,6 +136,7 @@ export default {
           this.riskFields = response.data.filter(function (rf) {
             // Set style based on data type
             if (rf.risk.id === riskID) {
+              // rf.data = ''
               return rf
             }
           })
@@ -141,6 +146,19 @@ export default {
           console.log(err)
         })
       this.loading = false
+    },
+    updateRField: function (rfield) {
+      this.loading = true
+      this.$http.put(`/api/riskfield/${rfield.id}/`, rfield)
+        .then((response) => {
+          this.loading = false
+          // this.rfield = response.data
+          this.getRFields()
+        })
+        .catch((err) => {
+          this.loading = false
+          console.log(err)
+        })
     },
     clear: function () {
       // Clears all form inputs
@@ -154,14 +172,19 @@ export default {
     },
     close: function () {
       // Clear form and close the dialog
+      console.log(this.riskFields)
       this.clear()
       this.rEntryDialog = false
     },
     submit: function () {
       // Validate form, submit data, and close the dialog
       if (this.$refs.riskForm.validate()) {
+        this.rEntryDialog = false
+        // Get and submit data
+        for (var key in this.riskFields) {
+          this.updateRField(this.riskFields[key])
+        }
       }
-      this.rEntryDialog = false
     }
   }
 }

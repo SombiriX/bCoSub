@@ -35,18 +35,6 @@ class RiskField(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    @property
-    def field(self):
-        if self.field_type == self.TXT:
-            return self.field_text
-        if self.field_type == self.NUM:
-            return self.field_num,
-        if self.field_type == self.DAT:
-            return self.field_date,
-        if self.field_type == self.ENM:
-            return self.field_enum_text
-        raise AssertionError("Field type is not defined")
-
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
