@@ -76,6 +76,9 @@ class RiskFieldSerializer(serializers.ModelSerializer):
             rField.field_enum = None
             rField.field_type = in_field_type
 
+            rField.save()
+            return rField
+
         # Use the dynamic field "field" to update this risksField's
         # underlying data
         field_input = validated_data.get('field', None)
