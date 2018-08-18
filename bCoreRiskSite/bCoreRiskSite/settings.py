@@ -25,7 +25,9 @@ SECRET_KEY = '&oxibroabj_mck$zr9ia-olud11@33vg23d55k9ovlurrd0jpq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.254.' + str(v) for v in range(256)]
+ALLOWED_HOSTS = (
+    ['192.168.254.' + str(v) for v in range(256)]
+    + ['tbhwm8l6mi.execute-api.us-west-1.amazonaws.com'])
 
 
 # Application definition
