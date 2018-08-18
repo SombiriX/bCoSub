@@ -65,8 +65,16 @@ class RiskFieldSerializer(serializers.ModelSerializer):
         # Update the existing field
         # continue with existing data if inputs are None
         rField.field_name = validated_data.get('field_name', rField.field_name)
-        rField.field_type = validated_data.get('field_type', rField.field_type)
         rField.risk = validated_data.get('risk_id', rField.risk)
+
+        # Clear all fields if the field type is changing
+        in_field_type = validated_data.get('field_type', rField.field_type)
+        if rField.field_type != in_field_type:
+            rField.field_text = None
+            rField.field_num = None
+            rField.field_date = None
+            rField.field_enum = None
+            rField.field_type = in_field_type
 
         # Use the dynamic field "field" to update this risksField's
         # underlying data
