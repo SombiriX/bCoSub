@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Risk, RiskField, Choice
 
+# Useful defines for riskField object's field type
 TXT = 'T'
 NUM = 'N'
 DAT = 'D'
@@ -8,6 +9,9 @@ ENM = 'E'
 
 
 class RiskSerializer(serializers.ModelSerializer):
+    """
+    Read \ Writes a serialized Risk object
+    """
     class Meta:
         model = Risk
         fields = '__all__'
@@ -44,6 +48,9 @@ class riskFieldFieldSerializer(serializers.Field):
 
 
 class RiskFieldSerializer(serializers.ModelSerializer):
+    """
+    Read \ Writes a serialized RiskField object
+    """
     risk_id = serializers.PrimaryKeyRelatedField(queryset=Risk.objects.all())
     field = riskFieldFieldSerializer()
 
@@ -53,6 +60,7 @@ class RiskFieldSerializer(serializers.ModelSerializer):
         depth = 1
 
     def create(self, validated_data):
+        # Create a new riskField with required fields
         rField = RiskField.objects.create(
             field_name=validated_data['field_name'],
             field_type=validated_data['field_type'],
@@ -112,6 +120,9 @@ class RiskFieldSerializer(serializers.ModelSerializer):
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
+    """
+    Read \ Writes a serialized Choice object
+    """
     risk_field = serializers.PrimaryKeyRelatedField(queryset=RiskField.objects.all())
 
     class Meta:
@@ -120,6 +131,7 @@ class ChoiceSerializer(serializers.ModelSerializer):
         depth = 1
 
     def create(self, validated_data):
+        # Create a new choice with required fields
         choice = Choice.objects.create(
             choice_text=validated_data['choice_text'],
             risk_field=validated_data['risk_field'],

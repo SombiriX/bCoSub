@@ -21,7 +21,6 @@ from bCoreRiskApp.views import appView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('app/', include('bCoreRiskApp.urls')),
     path('app/', appView.as_view()),
     path('api/', include(router.urls)),
 ]
