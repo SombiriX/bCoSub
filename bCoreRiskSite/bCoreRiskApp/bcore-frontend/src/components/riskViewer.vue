@@ -66,9 +66,9 @@
                         </v-text-field>
                         <v-menu
                           v-if="curRiskFields[i].field_type === 'D'"
-                          ref="dateMenu"
+                          :ref="'dateMenu'+i"
                           :close-on-content-click="false"
-                          v-model="dateMenu"
+                          v-model="curRiskFields[i].dateMenu"
                           :nudge-right="40"
                           :return-value.sync="curRiskFields[i].field"
                           lazy
@@ -218,6 +218,11 @@ export default {
           return rf
         }
       })
+        .map(function (rf) {
+          // Set data menu properties
+          rf.dateMenu = false
+          return rf
+        })
     },
     getCurRiskFields: function () {
       return this.riskRiskFields(this.currentRisk)
@@ -291,7 +296,9 @@ export default {
       return (fieldType === 'E') && !(this.enumCheck)
     },
     saveDate: function (i) {
-      this.$refs.dateMenu[i].save(this.curRiskFields[i].field)
+      // Get the dateMenu element, store user input, and close the picker
+      this.$refs['dateMenu' + i][0].save(this.curRiskFields[i].field)
+      this.curRiskFields[i].dateMenu = false
     }
   }
 }
