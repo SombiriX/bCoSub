@@ -43,5 +43,9 @@ Issues resolved:
 - Clicking a chip element causes the chip's text to disappear
     - Passing objects as props causes 2-way binding which leads to undesired/ wierd results
     - [Resolution] - Create new object made of fields from existing object to pass
-
+- Needed to downgrade python from 3.7 to 3.6 to install Zappa, this has resulted in app breaking horribly. Site does not render, console output "[Vue warn]: Cannot find element: #app" 404 error for chunk vendors js files
+    - No files were changed so issue probably stems from package versions
+    - pip uninstalled django extenstions and webpack loader packages
+        - Reinstalling did not fix
+    - [Resolution] Added div with id "app" to index html. Rebuilding frontend files with updated index.html resolved isseue. Ascribing issue to stale build files since this issue should, otherwise, have appears earlier.
 
