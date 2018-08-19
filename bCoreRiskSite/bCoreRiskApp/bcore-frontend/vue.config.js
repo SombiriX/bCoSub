@@ -14,6 +14,6 @@ module.exports = {
       filename: 'bundle.js'
     },
   },
-  baseUrl: '/static'
+  baseUrl: 'https://zappa-bcobucket1.s3.amazonaws.com'
 
 }

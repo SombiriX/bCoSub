@@ -5,10 +5,10 @@
         "project_name": "bcorerisksite",
         "runtime": "python3.6",
         "s3_bucket": "zappa-wagtq8pwd",
-		"aws_region":"us-west-1",
+        "aws_region":"us-west-1",
         "vpc_config" : {
-            "SubnetIds": ["subnet-0cfe83b4489688803", "subnet-0cfe83b4489688803"],
-            "SecurityGroupIds": [ "sg-0318d0ec3168bf8ac", "sg-067347c4b2c814bc4" ]
+            "SubnetIds": ["subnet-047175f6b11ddf188", "subnet-0f0103807dc3d26a8"],
+            "SecurityGroupIds": [ "sg-0b7a142fc639c2268" ]
         }
     }
 }
