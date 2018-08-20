@@ -103,7 +103,7 @@ export default {
     getRFields: function () {
       this.loading = true
       var riskID = this.risk_id
-      this.$http.get('/api/riskfield/')
+      this.$http.get(this.baseURL + '/api/riskfield/')
         .then((response) => {
           this.risk_fields = response.data.filter(function (rf) {
             // Set style based on data type
@@ -131,7 +131,7 @@ export default {
     },
     getRField: function (id) {
       this.loading = true
-      this.$http.get(`/api/riskfield/${id}/`)
+      this.$http.get(this.baseURL + `/api/riskfield/${id}/`)
         .then((response) => {
           this.currentRField = response.data
           this.loading = false
@@ -143,7 +143,7 @@ export default {
     },
     addRField: function () {
       this.loading = true
-      this.$http.post('/api/riskfield/', this.newRField)
+      this.$http.post(this.baseURL + '/api/riskfield/', this.newRField)
         .then((response) => {
           this.loading = false
           this.getRFields()
@@ -155,7 +155,7 @@ export default {
     },
     updateRField: function () {
       this.loading = true
-      this.$http.put(`/api/riskfield/${this.currentRField.id}/`, this.currentRField)
+      this.$http.put(this.baseURL + `/api/riskfield/${this.currentRField.id}/`, this.currentRField)
         .then((response) => {
           this.loading = false
           this.currentRField = response.data
@@ -168,7 +168,7 @@ export default {
     },
     deleteRField: function (id) {
       this.loading = true
-      this.$http.delete(`/api/riskfield/${id}/`)
+      this.$http.delete(this.baseURL + `/api/riskfield/${id}/`)
         .then((response) => {
           this.loading = false
           this.getRFields()

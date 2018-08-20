@@ -8,6 +8,21 @@ import riskApp from './App.vue'
 
 Vue.config.productionTip = true
 
+// Set a base url for running locally or deployed
+Vue.mixin({
+  data: function () {
+    return {
+      get baseURL () {
+        // Local Deployment
+        // return ''
+
+        // Zappa Deployment
+        return '/dev'
+      }
+    }
+  }
+})
+
 // Set the CSRF Token on all modification requests
 Vue.http.interceptors.push((request, next) => {
   // Get the CSRF Token

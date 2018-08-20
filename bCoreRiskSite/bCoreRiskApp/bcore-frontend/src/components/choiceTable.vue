@@ -150,7 +150,7 @@ export default {
     getChoices: function () {
       this.loading = true
       var rFieldID = this.dlgProps.rFieldID
-      this.$http.get('/api/choice/')
+      this.$http.get(this.baseURL + '/api/choice/')
         .then((response) => {
           this.choices = response.data.filter(function (choice) {
             // Set style based on data type
@@ -167,7 +167,7 @@ export default {
     },
     getChoice: function (id) {
       this.loading = true
-      this.$http.get(`/api/choice/${id}/`)
+      this.$http.get(this.baseURL + `/api/choice/${id}/`)
         .then((response) => {
           this.currentChoice = response.data
           this.loading = false
@@ -179,7 +179,7 @@ export default {
     },
     addChoice: function () {
       this.loading = true
-      this.$http.post('/api/choice/', this.newChoice)
+      this.$http.post(this.baseURL + '/api/choice/', this.newChoice)
         .then((response) => {
           this.loading = false
           this.getChoices()
@@ -192,7 +192,7 @@ export default {
     },
     updateChoice: function () {
       this.loading = true
-      this.$http.put(`/api/choice/${this.currentChoice.id}/`, this.currentChoice)
+      this.$http.put(this.baseURL + `/api/choice/${this.currentChoice.id}/`, this.currentChoice)
         .then((response) => {
           this.loading = false
           this.currentChoice = response.data
@@ -220,7 +220,7 @@ export default {
     },
     deleteChoice: function (id) {
       this.loading = true
-      this.$http.delete(`/api/choice/${id}/`)
+      this.$http.delete(this.baseURL + `/api/choice/${id}/`)
         .then((response) => {
           this.loading = false
           this.getChoices()

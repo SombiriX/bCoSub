@@ -168,6 +168,11 @@ export default {
       }
     }
   },
+  watch: {
+    dialog (val) {
+      this.close()
+    }
+  },
   created: function () {
     this.getRisks()
     this.getRFields()
@@ -178,7 +183,7 @@ export default {
   methods: {
     getRisks: function () {
       this.loading = true
-      this.$http.get('/api/risk/')
+      this.$http.get(this.baseURL + '/api/risk/')
         .then((response) => {
           this.risks = response.data
           this.loading = false
@@ -190,7 +195,7 @@ export default {
     },
     getRisk: function (id) {
       this.loading = true
-      this.$http.get(`/api/risk/${id}/`)
+      this.$http.get(this.baseURL + `/api/risk/${id}/`)
         .then((response) => {
           this.currentRisk = response.data
           this.loading = false
@@ -202,7 +207,7 @@ export default {
     },
     getRFields: function () {
       this.loading = true
-      this.$http.get('/api/riskfield/')
+      this.$http.get(this.baseURL + '/api/riskfield/')
         .then((response) => {
           this.riskFields = response.data
         })
@@ -219,7 +224,7 @@ export default {
         }
       })
         .map(function (rf) {
-          // Set data menu properties
+          // Set date menu properties
           rf.dateMenu = false
           return rf
         })
@@ -230,7 +235,7 @@ export default {
     getChoices: function () {
       this.loading = true
       // var rFieldID = this.riskField.id
-      this.$http.get('/api/choice/')
+      this.$http.get(this.baseURL + '/api/choice/')
         .then((response) => {
           this.choices = response.data
         })
@@ -242,7 +247,7 @@ export default {
     },
     updateRField: function (rField) {
       this.loading = true
-      this.$http.put(`/api/riskfield/${rField.id}/`, rField)
+      this.$http.put(this.baseURL + `/api/riskfield/${rField.id}/`, rField)
         .then((response) => {
           this.loading = false
           // this.rField = response.data
@@ -260,8 +265,13 @@ export default {
       this.rEntryDialog = true
     },
     close: function () {
-      // Clear form and close the dialog
+      // Close the dialog
       this.rEntryDialog = false
+      this.curRiskFields = this.curRiskFields.map(function (rf) {
+          // Set date menu to closed
+          rf.dateMenu = false
+          return rf
+      })
     },
     submit: function () {
       // Validate form, submit data, and close the dialog

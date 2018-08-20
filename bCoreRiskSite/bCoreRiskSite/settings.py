@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = (
     ['192.168.254.' + str(v) for v in range(256)]
-    + ['tbhwm8l6mi.execute-api.us-west-1.amazonaws.com'])
+    + ['tbhwm8l6mi.execute-api.us-west-1.amazonaws.com']
+    + ['9au3fsc52d.execute-api.us-west-1.amazonaws.com'])
 
 
 # Application definition

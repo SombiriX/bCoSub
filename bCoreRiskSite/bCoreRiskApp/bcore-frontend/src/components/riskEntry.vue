@@ -141,7 +141,7 @@ export default {
   methods: {
     getRisks: function () {
       this.loading = true
-      this.$http.get('/api/risk/')
+      this.$http.get(this.baseURL + '/api/risk/')
         .then((response) => {
           this.risks = response.data
           this.loading = false
@@ -153,7 +153,7 @@ export default {
     },
     getRisk: function (id) {
       this.loading = true
-      this.$http.get(`/api/risk/${id}/`)
+      this.$http.get(this.baseURL + `/api/risk/${id}/`)
         .then((response) => {
           this.currentRisk = response.data
           this.loading = false
@@ -165,7 +165,7 @@ export default {
     },
     addRisk: function () {
       this.loading = true
-      this.$http.post('/api/risk/', this.newRiskClass)
+      this.$http.post(this.baseURL + '/api/risk/', this.newRiskClass)
         .then((response) => {
           this.loading = false
           this.getRisks()
@@ -178,7 +178,7 @@ export default {
     },
     updateRisk: function () {
       this.loading = true
-      this.$http.put(`/api/risk/${this.currentRisk.id}/`, this.currentRisk)
+      this.$http.put(this.baseURL + `/api/risk/${this.currentRisk.id}/`, this.currentRisk)
         .then((response) => {
           this.loading = false
           this.currentRisk = response.data
@@ -199,7 +199,7 @@ export default {
     },
     deleteRisk: function (id) {
       this.loading = true
-      this.$http.delete(`/api/risk/${id}/`)
+      this.$http.delete(this.baseURL + `/api/risk/${id}/`)
         .then((response) => {
           this.loading = false
           this.getRisks()
