@@ -7,9 +7,7 @@ This is a sample risk management application for insurers built with Django, Vue
 
 ## Usage
 
-Try the app [here](https://9au3fsc52d.execute-api.us-west-1.amazonaws.com/dev/app/), deployed using Amazon Zappa.
-
-OR to run it locally
+Run it locally
 
 - Download or clone a released version
 - Install dependencies  
